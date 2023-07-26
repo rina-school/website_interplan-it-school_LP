@@ -1,0 +1,13 @@
+@use './variables' as v;
+
+@mixin mq($breakpoint: lg) {
+  $maxWidth: v.$breakPointPc;
+
+  @if $breakpoint == md {
+    $maxWidth: v.$breakPointSp;
+  }
+
+  @media screen and (max-width: $maxWidth) {
+    @content;
+  }
+}

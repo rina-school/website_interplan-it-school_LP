@@ -1,0 +1,57 @@
+@use './variables' as v;
+@use './mixins' as m;
+@use './function' as f;
+
+*, ::before, ::after {
+  box-sizing: border-box;
+  color: v.$textColor;
+}
+
+body {
+  font-family: v.$fontFamily;
+}
+
+main {
+  padding-top: v.$pcHeaderHeight;
+}
+
+section:not(.mv-contents) {
+  padding: v.$pcSectionPaddingHeight 0;
+
+  @include m.mq(md) {
+    padding: clamp(56px, f.pixelToVwSize(56, v.$spViewPort), v.$pcSectionPaddingHeight) 0;
+  }
+}
+
+h2.section-title {
+  font-size: f.pixelToRemSize(v.$pixelSizeLg);
+  font-weight: v.$fontWeightBold;
+  line-height: v.$fontLineHeight52;
+  text-align: center;
+}
+
+dt {
+  font-size: f.pixelToRemSize(v.$pixelSizeMd);
+  line-height: v.$fontLineHeight35;
+  font-weight: v.$fontWeightBold;
+}
+
+p, li, dd {
+  font-size: f.pixelToRemSize(v.$pixelSizeSm);
+  line-height: v.$fontLineHeight28;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+  font-size: 0;
+  line-height: 0;
+}
+

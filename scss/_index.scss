@@ -1,0 +1,521 @@
+@use './variables' as v;
+@use './mixins' as m;
+@use './function' as f;
+
+// ヘッダー
+header {
+  width: 100%;
+  background-color: v.$white;
+}
+
+.header-area-fix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: v.$pcHeaderHeight;
+  background-color: v.$white;
+  z-index: v.$zindexHeader;
+  padding: 0 f.pixelToVwSize(40, 1280);
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.29);
+}
+
+.header-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+
+  .logo {
+    a {
+      display: block;
+      height: 30px;
+    }
+
+    img {
+      height: 30px;
+    }
+  }
+
+  .header-inquiry-btn {
+    margin: f.pixelToRemSize(17) 0;
+    background-color: v.$subPrimaryColor2;
+    border-radius: f.pixelToVwSize(63, 1280);
+
+    &-area {
+      display: inline-block;
+      padding: f.pixelToRemSize(16) f.pixelToRemSize(16) f.pixelToRemSize(16) f.pixelToRemSize(48);
+    }
+
+    .inquiry-btn {
+      font-size: f.pixelToRemSize(v.$pixelSizeSm);
+      line-height: v.$fontLineHeight28;
+      font-weight: v.$fontWeightBold;
+    }
+
+    .fa-chevron-right::before {
+      color: v.$textColor;
+      padding-left: f.pixelToRemSize(22);
+    }
+  }
+}
+
+.nav-area {
+  width: 100%;
+  background-color: v.$white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  .nav-list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 928px;
+    width: 100%;
+    margin: f.pixelToRemSize(16) auto;
+
+    .nav-list-item {
+      font-size: f.pixelToRemSize(v.$pixelSizeSm);
+      line-height: v.$fontLineHeight28;
+      font-weight: v.$fontWeightBold;
+    }
+
+    .nav-inquiry-btn {
+      padding: f.pixelToRemSize(8) f.pixelToRemSize(16);
+      background-color: v.$subPrimaryColor2;
+      border-radius: f.pixelToRemSize(28);
+    }
+  }
+}
+
+// メインビジュアル
+.mv-contents {
+  width: 100%;
+  height: calc(100vh - v.$pcHeaderHeight - v.$pcNavHeight);
+  background: v.$mvBgColor url(../../img/mv-bg.png) center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: f.pixelToVwSize(48, 1280);
+
+  .txt-area {
+
+    .catchcopy-main {
+      font-size: f.pixelToRemSize(v.$pixelSizeXl);
+      line-height: v.$fontLineHeight58;
+      font-weight: v.$fontWeightBold;
+      letter-spacing: v.$fontCharacterSpacing4-8;
+    }
+
+    .catchcopy-main-font {
+      font-size: f.pixelToRemSize(v.$pixelSizeCathCopy);
+      line-height: v.$fontLineHeight58;
+      font-weight: v.$fontWeightBold;
+      letter-spacing: v.$fontCharacterSpacing4;
+    }
+
+    .catchcopy-subtitle {
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      line-height: v.$fontLineHeight35;
+      font-weight: v.$fontWeightBold;
+      margin-top: f.pixelToRemSize(8);
+    }
+
+    .catchcopy-job-name {
+      font-size: f.pixelToRemSize(v.$pixelSizeXs);
+      line-height: v.$fontLineHeight20;
+      font-weight: v.$fontWeightBold;
+      margin: f.pixelToRemSize(24) 0;
+    }
+
+    .catchcopy-points-list {
+      display: flex;
+      gap: f.pixelToRemSize(24);
+
+      .catchcopy-points-item {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        background: v.$subPrimaryColor;
+        font-size: f.pixelToRemSize(v.$pixelSizeSm);
+        line-height: v.$fontLineHeight28;
+        font-weight: v.$fontWeightBold;
+        position: relative;
+
+        span {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+          width :95px;
+          text-align:center;
+          color: v.$white;
+        }
+      }
+    }
+  }
+
+  .mv-img-area {
+    width: min(f.pixelToVwSize(600, 1280), 750px);
+    height: min(f.pixelToVwSize(400, 1280), 500px);
+
+    .mv-img {
+      width: 100%;
+      height: 100%;
+      border-radius: f.pixelToRemSize(60);
+    }
+  }
+}
+
+// インタープランについて
+section.about-contents {
+  padding-top: calc(v.$pcNavHeight + v.$pcSectionPaddingHeight);
+  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+
+  .about-contents-area {
+    max-width: 990px;
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    gap: f.pixelToRemSize(60);
+
+    .about-txt-area {
+      max-width: 570px;
+      width: 100%;
+  
+      .section-title {
+        margin-bottom: f.pixelToRemSize(32);
+        text-align: left;
+      }
+      .about-txt {
+        width: 100%;
+        font-size: f.pixelToRemSize(v.$pixelSizeSm);
+        line-height: v.$fontLineHeight28;
+      }
+    }
+  
+    .about-img-area {
+      width: 100%;
+      max-width: 360px;
+      height: 300px;
+
+      .about-img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+// おすすめの方
+.recommend-contents {
+  .recommend-contents-area {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+
+    .recommend-title {
+      margin: 0 auto f.pixelToRemSize(v.$pixelSizeXl);
+
+      &::after {
+        content: '';
+        background-image: url(../img/svg/good.svg);
+        display: inline-block;
+        width: f.pixelToRemSize(40);
+        height: f.pixelToRemSize(40);
+        background-size: contain;
+        vertical-align: sub;
+        margin-left: 16px;
+      }
+    }
+
+    .recommend-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: f.pixelToRemSize(24) f.pixelToRemSize(48);
+
+      &-item {
+        font-size: f.pixelToRemSize(v.$pixelSizeSm);
+        line-height: v.$fontLineHeight28;
+        max-width: f.pixelToRemSize(420);
+        width: 100%;
+        max-height: f.pixelToRemSize(56);
+        height: 100%;
+      }
+    }
+  }
+
+  .fa-circle-check::before {
+    color: v.$subPrimaryColor;
+    margin-right: f.pixelToRemSize(v.$pixelSizeSm);
+    font-size: f.pixelToRemSize(v.$pixelSizeMd);
+    line-height: v.$fontLineHeight28;
+    vertical-align: middle;
+  }
+}
+
+// 卒業生インタビュー
+.interview-contents {
+  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+
+  .interview-contents-area {
+    margin: 0 auto;
+    max-width: f.pixelToRemSize(720);
+    width: 100%;
+
+    .interview-txt {
+      text-align: center;
+      margin: f.pixelToRemSize(32) auto;
+    }
+  }
+}
+
+// 見学会予約・問い合わせ
+.inquiry-contents {
+  width: 100%;
+  background: linear-gradient(rgba(v.$inquiryBgColor, .88), rgba(v.$inquiryBgColor, .88)), url(../../img/inquiry-bg.jpeg) center center/cover no-repeat;
+
+  &-area {
+    .inquiry-contents-point-in-questions {
+      width: 682px;
+      background-color: v.$white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: f.pixelToRemSize(48) auto 0;
+    }
+  } 
+
+  .point-in-questions-list-item {
+    margin-bottom: f.pixelToRemSize(16);
+    font-size: f.pixelToRemSize(v.$pixelSizeXs);
+    line-height: v.$fontLineHeight20;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .troubled-person-img-area {
+    width: f.pixelToRemSize(170);
+
+    .img {
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  .inquiry-txt-area {
+    text-align: center;
+    font-size: f.pixelToRemSize(v.$pixelSizeMd);
+    line-height: v.$fontLineHeight35;
+    margin: f.pixelToRemSize(32) 0;
+
+    &::after {
+      content: '';
+      background-image: url(../img/svg/lightBulb.svg);
+      display: inline-block;
+      width: f.pixelToRemSize(29);
+      height: f.pixelToRemSize(36);
+      background-size: contain;
+      vertical-align: middle;
+      transform: matrix(2, 0.84, -0.84, 2, 0, 0);
+    }
+  }
+
+  .inquiry-btn-common {
+    margin: f.pixelToRemSize(17) auto;
+    background-color: v.$subPrimaryColor2;
+    border-radius: f.pixelToVwSize(63, 1280);
+    box-shadow: 0px 7px 12px #00000029;
+    max-width: 800px;
+    width: 100%;
+
+    .inquiry-btn-area {
+      display: inline-block;
+      padding: f.pixelToRemSize(32) f.pixelToRemSize(47) f.pixelToRemSize(32) f.pixelToRemSize(150);
+    }
+
+    .inquiry-btn {
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      line-height: v.$fontLineHeight35;
+      font-weight: v.$fontWeightBold;
+    }
+
+    .fa-chevron-right::before {
+      color: v.$textColor;
+      padding-left: f.pixelToRemSize(89);
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+    }
+  }
+}
+
+// おすすめ理由
+.reason-contents {
+  .reason-title-decoration {
+    font-size: f.pixelToRemSize(v.$pixelSizeXl);
+    line-height: v.$fontLineHeight52;
+    color: v.$subPrimaryColor;
+  }
+
+  .reason-contents-item {
+    max-width: 990px;
+    margin: f.pixelToRemSize(48) auto;
+    width: 90%;
+    background: v.$white;
+    box-shadow: 0px 5px 10px #00000029;
+    padding: f.pixelToRemSize(40) f.pixelToRemSize(32);
+    gap: f.pixelToRemSize(32);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .reason-contents-item-title {
+      border-bottom: solid v.$subPrimaryColor 1px;
+      border-image: linear-gradient(to right, v.$subPrimaryColor 0%, v.$subPrimaryColor2 100%);
+      border-image-slice: 1;
+      padding-bottom: f.pixelToRemSize(8);
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      line-height: v.$fontLineHeight35;
+      margin-bottom: f.pixelToRemSize(24);
+  
+      .reason-title-number {
+        font-size: f.pixelToRemSize(v.$pixelSizeXl);
+        line-height: v.$fontLineHeight52;
+        color: v.$subPrimaryColor;
+        padding-right: f.pixelToRemSize(24);
+        vertical-align: sub;
+      }
+    }
+  
+    .reason-contents-item-img-area {
+      width: 100%;
+      max-width: 328px;
+      height: 251px;
+  
+      img {
+        min-width: 328px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+}
+
+// コース紹介
+.course-contents {
+  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+
+  .course-contents-txt {
+    margin: f.pixelToRemSize(40) auto;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+
+// アクセス
+.access-contents {
+  .access-contents-area {
+    .access-contents-discription {
+      margin-top: f.pixelToRemSize(48);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: f.pixelToVwSize(100, 1280);
+    }
+  }
+
+  .access-contents-googlemap {
+    width: 395px;
+    height: 233px;
+  }
+
+  .access-contents-txt dl {
+    dt {
+      margin-bottom: f.pixelToRemSize(12);
+      margin-top: f.pixelToRemSize(24);
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    .access-station {
+      font-size: f.pixelToRemSize(v.$pixelSizeSm);
+      line-height: v.$fontLineHeight28;
+    }
+
+    .access-route {
+      margin-bottom: f.pixelToRemSize(12);
+    }
+
+    .access-tel-reception-time {
+      // 電話マークの分だけ余白を開ける
+      margin-left: f.pixelToRemSize(28);
+    }
+  }
+
+  .fa-phone::before, .fa-envelope {
+    font-size: f.pixelToRemSize(20);
+    margin-right: f.pixelToRemSize(8);
+  }
+}
+
+// footer
+footer {
+  background-color: v.$primaryColor;
+  padding: f.pixelToRemSize(24) 0;
+
+  .footer-nav-list {
+    display: flex;
+    justify-content: center;
+    gap: 0 f.pixelToRemSize(72);
+    margin-bottom: f.pixelToRemSize(16);
+
+
+    .footer-nav-list-item a {
+      font-size: f.pixelToRemSize(v.$pixelSizeXs);
+      line-height: v.$fontLineHeight20;
+      color: v.$white;
+    }
+  }
+
+  .footer-copyright {
+    text-align: center;
+    font-size: f.pixelToRemSize(v.$pixelSizeXs);
+    line-height: v.$fontLineHeight20;
+
+    small {
+      color: v.$white;
+    }
+  }
+}
+
+
+
+

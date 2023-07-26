@@ -1,0 +1,55 @@
+@charset 'utf8';
+
+// フォントファミリー
+$fontFamily: 'Noto Sans JP', sans-serif;
+
+// フォント行間
+$fontLineHeight58: 58px;
+$fontLineHeight52: 52px;
+$fontLineHeight35: 35px;
+$fontLineHeight28: 28px;
+$fontLineHeight20: 20px;
+$fontLineHeight17: 17px;
+
+// フォント文字間
+$fontCharacterSpacing4-8: 4.8px;
+$fontCharacterSpacing4: 4px;
+
+// フォントの太さ
+$fontWeightBold: 700;
+
+// サイズ（px値）※主にフォントサイズ用
+$pixelSizeXl: 48;
+$pixelSizeCathCopy: 40; 
+$pixelSizeLg: 36; 
+$pixelSizeMd: 24;
+$pixelSizeSm: 16;
+$pixelSizeXs: 14;
+$pixelSizeXxs: 12;
+
+// サイズ(px値→vw値)計算の基準となるviewport(px値)
+$spViewPort: 375;
+
+// カラーコード
+$primaryColor: #3896b2;
+$subPrimaryColor: #ff8700;
+$subPrimaryColor2: #ffc836;
+$textColor: #2d2d2d;
+$mvBgColor: #e7f4f1;
+$inquiryBgColor: #fff4dd;
+$courseDecorationColor: #256478;
+$white: #fff;
+
+// ブレークポイント
+$breakPointPc: 960px;
+$breakPointSp: 768px;
+
+// 特定要素の高さ
+$pcHeaderHeight: 90px;
+$pcNavHeight: 76px;
+$pcSectionPaddingHeight: 80px;
+
+// z-index
+$zindexLoading: 1000;
+$zindexHeader: 100;
+$zindexSpSidebtn: 10;

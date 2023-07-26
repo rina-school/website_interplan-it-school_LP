@@ -1,0 +1,11 @@
+@use 'sass:math';
+
+//viewport幅 === 375px の時に
+//ちょうど$baseSizeとなるvw値を返す
+@function pixelToVwSize($baseSize, $baseViewPort) {
+  @return math.div(100, $baseViewPort) * $baseSize * 1vw;
+}
+
+@function pixelToRemSize($size) {
+	@return calc($size / 16) + rem;
+}
