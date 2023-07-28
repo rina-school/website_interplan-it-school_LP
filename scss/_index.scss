@@ -16,8 +16,13 @@ header {
   height: v.$pcHeaderHeight;
   background-color: v.$white;
   z-index: v.$zindexHeader;
-  padding: 0 f.pixelToVwSize(40, 1280);
+  padding: 0 f.pixelToVwSize(40, v.$pcViewPort);
   box-shadow: 0px 3px 6px rgba(0,0,0,0.29);
+
+  @include m.mq {
+    height: v.$spHeaderHeight;
+    padding: 0 f.spMinRangeVwVwSize(30, v.$spViewPort, 40, v.$pcViewPort);
+  }
 }
 
 .header-area {
@@ -26,27 +31,38 @@ header {
   align-items: center;
   max-width: 1200px;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 
   .logo {
     a {
       display: block;
       height: 30px;
+
+      @include m.mq {
+        height: f.spMinRangeVwRemSize(25, v.$spViewPort, 30);
+      }
     }
 
     img {
       height: 30px;
+
+      @include m.mq {
+        height: f.spMinRangeVwRemSize(25, v.$spViewPort, 30);
+      }
     }
   }
 
   .header-inquiry-btn {
     margin: f.pixelToRemSize(17) 0;
     background-color: v.$subPrimaryColor2;
-    border-radius: f.pixelToVwSize(63, 1280);
+    border-radius: f.pixelToVwSize(63, v.$pcViewPort);
 
     &-area {
-      display: inline-block;
       padding: f.pixelToRemSize(16) f.pixelToRemSize(16) f.pixelToRemSize(16) f.pixelToRemSize(48);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .inquiry-btn {
@@ -58,6 +74,70 @@ header {
     .fa-chevron-right::before {
       color: v.$textColor;
       padding-left: f.pixelToRemSize(22);
+    }
+  }
+
+  .header-nav-btn {
+    @include m.mq {
+      width: f.spMinRangeVwRemSize(36, v.$spViewPort, 52);
+      height: f.spMinRangeVwRemSize(36, v.$spViewPort, 52);
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .hamburger-menu,
+      .hamburger-menu::before,
+      .hamburger-menu::after {
+        transition: .3s;
+      }
+
+      .hamburger-menu {
+        display: block;
+        width: f.spMinRangeVwRemSize(24, v.$spViewPort, 35);
+        height: f.pixelToRemSize(3);
+        background: v.$primaryColor;
+        position: relative;
+      }
+    
+      .hamburger-menu::before,
+      .hamburger-menu::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: v.$primaryColor;
+        left: 0;
+      }
+    
+      .hamburger-menu::before {
+        // 負の数の方が小さいので敢えてmaxを使用
+        top: max(f.pixelToVwSize(-9, 375), f.pixelToRemSize(-13));
+      }
+    
+      .hamburger-menu::after {
+        top: f.spMinRangeVwRemSize(9, v.$spViewPort, 13);
+      }
+
+      // headerにjs-nav-activeが追加されたとき
+      header.js-nav-active & .hamburger-menu {
+        background: transparent;
+      }
+
+      header.js-nav-active & .hamburger-menu::before
+      , header.js-nav-active & .hamburger-menu::after {
+        top: 0;
+        background: v.$primaryColor;
+      }
+
+      header.js-nav-active & .hamburger-menu::before {
+        transform: rotate(45deg);
+      }
+
+      header.js-nav-active & .hamburger-menu::after {
+        transform: rotate(-45deg);
+      }
     }
   }
 }
@@ -89,6 +169,10 @@ header {
       border-radius: f.pixelToRemSize(28);
     }
   }
+
+  @include m.mq {
+    display: none;
+  }
 }
 
 // メインビジュアル
@@ -99,15 +183,27 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: f.pixelToVwSize(48, 1280);
+  gap: f.pixelToVwSize(48, v.$pcViewPort);
+
+  @include m.mq {
+    height: calc(100vh - v.$spHeaderHeight);
+    flex-direction: column;
+    align-items: center;
+    padding-left: f.spMinRangeVwRemSize(20, v.$spViewPort, 30);
+  }
 
   .txt-area {
-
     .catchcopy-main {
       font-size: f.pixelToRemSize(v.$pixelSizeXl);
       line-height: v.$fontLineHeight58;
       font-weight: v.$fontWeightBold;
       letter-spacing: v.$fontCharacterSpacing4-8;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeLg, v.$spViewPort, v.$pixelSizeXl);
+        line-height: min(f.pixelToVwSize(35, 375), v.$fontLineHeight58);
+        letter-spacing: min(f.pixelToVwSize(3.6, 375), v.$fontCharacterSpacing4-8);
+      }
     }
 
     .catchcopy-main-font {
@@ -115,6 +211,12 @@ header {
       line-height: v.$fontLineHeight58;
       font-weight: v.$fontWeightBold;
       letter-spacing: v.$fontCharacterSpacing4;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeMd, v.$spViewPort, v.$pixelSizeCathCopy);
+        line-height: min(f.pixelToVwSize(35, 375), v.$fontLineHeight58);
+        letter-spacing: min(f.pixelToVwSize(3.6, 375), v.$fontCharacterSpacing4);
+      }
     }
 
     .catchcopy-subtitle {
@@ -122,6 +224,11 @@ header {
       line-height: v.$fontLineHeight35;
       font-weight: v.$fontWeightBold;
       margin-top: f.pixelToRemSize(8);
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: min(f.pixelToVwSize(35, 375), v.$fontLineHeight28);
+      }
     }
 
     .catchcopy-job-name {
@@ -129,6 +236,12 @@ header {
       line-height: v.$fontLineHeight20;
       font-weight: v.$fontWeightBold;
       margin: f.pixelToRemSize(24) 0;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+        line-height: min(f.pixelToVwSize(17, 375), v.$fontLineHeight20);
+        margin: f.spMinRangeVwRemSize(16, v.$spViewPort, 24) 0;
+      }
     }
 
     .catchcopy-points-list {
@@ -145,6 +258,13 @@ header {
         font-weight: v.$fontWeightBold;
         position: relative;
 
+        @include m.mq {
+          width: f.spMinRangeVwRemSize(70, v.$spViewPort, 95);
+          height: f.spMinRangeVwRemSize(70, v.$spViewPort, 95);
+          font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+          line-height: min(f.pixelToVwSize(17, 375), v.$fontLineHeight20);
+        }
+
         span {
           position: absolute;
           left: 0;
@@ -154,14 +274,23 @@ header {
           width :95px;
           text-align:center;
           color: v.$white;
+
+          @include m.mq {
+            width: f.spMinRangeVwRemSize(70, v.$spViewPort, 95);
+          }
         }
       }
     }
   }
 
   .mv-img-area {
-    width: min(f.pixelToVwSize(600, 1280), 750px);
-    height: min(f.pixelToVwSize(400, 1280), 500px);
+    width: min(f.pixelToVwSize(600, v.$pcViewPort), 750px);
+    height: min(f.pixelToVwSize(400, v.$pcViewPort), 500px);
+
+    @include m.mq {
+      width: min(f.pixelToVwSize(355, v.$spViewPort), 600px);
+      height: min(f.pixelToVwSize(237, v.$spViewPort), 400px);
+    }
 
     .mv-img {
       width: 100%;
@@ -176,6 +305,10 @@ section.about-contents {
   padding-top: calc(v.$pcNavHeight + v.$pcSectionPaddingHeight);
   background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
 
+  @include m.mq {
+    padding-top: v.$spSectionPaddingHeight;
+  }
+
   .about-contents-area {
     max-width: 990px;
     margin: 0 auto;
@@ -186,18 +319,33 @@ section.about-contents {
     flex-direction: row-reverse;
     gap: f.pixelToRemSize(60);
 
+    @include m.mq {
+      flex-direction: column;
+      gap: f.pixelToRemSize(24);
+      width: 78%;
+    }
+
     .about-txt-area {
       max-width: 570px;
       width: 100%;
-  
-      .section-title {
-        margin-bottom: f.pixelToRemSize(32);
-        text-align: left;
+    }
+
+    .section-title {
+      margin-bottom: f.pixelToRemSize(32);
+      text-align: left;
+
+      @include m.mq {
+        text-align: center; 
+        margin-bottom: 16px;
+        order: 1;
       }
-      .about-txt {
-        width: 100%;
-        font-size: f.pixelToRemSize(v.$pixelSizeSm);
-        line-height: v.$fontLineHeight28;
+    }
+
+    .about-txt {
+      width: 100%;
+
+      @include m.mq {
+        order: 3;
       }
     }
   
@@ -205,6 +353,12 @@ section.about-contents {
       width: 100%;
       max-width: 360px;
       height: 300px;
+
+      @include m.mq {
+        width: min(f.pixelToVwSize(194, v.$spViewPort), 360px);
+        height: min(f.pixelToVwSize(162, v.$spViewPort), 300px);
+        order: 2;
+      }
 
       .about-img {
         object-fit: cover;
@@ -224,8 +378,6 @@ section.about-contents {
     margin: 0 auto;
 
     .recommend-title {
-      margin: 0 auto f.pixelToRemSize(v.$pixelSizeXl);
-
       &::after {
         content: '';
         background-image: url(../img/svg/good.svg);
@@ -235,6 +387,11 @@ section.about-contents {
         background-size: contain;
         vertical-align: sub;
         margin-left: 16px;
+
+        @include m.mq {
+          width: f.spMinRangeVwRemSize(v.$pixelSizeLg, v.$spViewPort, 40);
+          height: f.spMinRangeVwRemSize(v.$pixelSizeLg, v.$spViewPort, 40);
+        }
       }
     }
 
@@ -244,12 +401,30 @@ section.about-contents {
       gap: f.pixelToRemSize(24) f.pixelToRemSize(48);
 
       &-item {
-        font-size: f.pixelToRemSize(v.$pixelSizeSm);
-        line-height: v.$fontLineHeight28;
+        display: flex;
         max-width: f.pixelToRemSize(420);
         width: 100%;
         max-height: f.pixelToRemSize(56);
         height: 100%;
+      }
+
+      @include m.mq {
+        display: flex;
+        width: 78%;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        gap: f.pixelToRemSize(24);
+        margin: 0 auto;
+        grid-template-columns: none;
+
+        &-item {
+          max-width: none;
+          max-height: none;
+          width: 100%;
+          height: auto;
+        }
       }
     }
   }
@@ -260,6 +435,11 @@ section.about-contents {
     font-size: f.pixelToRemSize(v.$pixelSizeMd);
     line-height: v.$fontLineHeight28;
     vertical-align: middle;
+
+    @include m.mq {
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+      margin-right: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeSm);
+    }
   }
 }
 
@@ -276,6 +456,23 @@ section.about-contents {
       text-align: center;
       margin: f.pixelToRemSize(32) auto;
     }
+
+    .interview-movie {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+
+      iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+
+        @include m.mq {
+          width: min(86.6666%, 720px);
+          height: min(86.6666%, 405px);
+        }
+      }
+    }
   }
 }
 
@@ -286,31 +483,86 @@ section.about-contents {
 
   &-area {
     .inquiry-contents-point-in-questions {
-      width: 682px;
+      width: 633px;
+      position: relative;
       background-color: v.$white;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: f.pixelToRemSize(48) auto 0;
+      gap: f.pixelToRemSize(24);
+      margin: 0 auto f.pixelToRemSize(56);
+      padding: f.pixelToRemSize(16) f.pixelToRemSize(32);
+
+      @include m.mq {
+        width: 73.333%;
+        flex-direction: column;
+        gap: f.spMinRangeVwRemSize(16, v.$spViewPort, 24);
+        padding: f.pixelToVwSize(24, v.$spViewPort);
+
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: f.pixelToRemSize(-50);
+        border: f.pixelToRemSize(50) solid transparent;
+        border-top: 24px solid v.$white;
+      }
     }
   } 
 
   .point-in-questions-list-item {
     margin-bottom: f.pixelToRemSize(16);
-    font-size: f.pixelToRemSize(v.$pixelSizeXs);
-    line-height: v.$fontLineHeight20;
 
     &:last-child {
       margin-bottom: 0;
     }
+
+    & > p {
+      position: relative;
+      font-size: f.pixelToRemSize(v.$pixelSizeXs);
+      line-height: v.$fontLineHeight20;
+      padding-left: f.pixelToRemSize(v.$pixelSizeXs);
+
+      @include m.mq {
+        padding-left: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+      }
+
+      &::before {
+        content: '・';
+        display: inline-block;
+        width: f.pixelToRemSize(v.$pixelSizeXs);
+        height: f.pixelToRemSize(v.$pixelSizeXs);
+        vertical-align: middle;
+        position: absolute;
+        left: 0;
+
+        @include m.mq {
+          width: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+          height: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+        }
+      }
+    }
   }
 
   .troubled-person-img-area {
-    width: f.pixelToRemSize(170);
+    width: 124px;
+    height: 124px;
+    border-radius: 50%;
+    overflow: hidden;
 
-    .img {
-      object-fit: cover;
+    @include m.mq {
+      width: f.spMinRangeVwRemSize(100, v.$spViewPort, 124);
+      height: f.spMinRangeVwRemSize(100, v.$spViewPort, 124);
+    }
+
+    img {
+      object-fit: fill;
       width: 100%;
+      scale: 1.4;
     }
   }
 
@@ -318,7 +570,12 @@ section.about-contents {
     text-align: center;
     font-size: f.pixelToRemSize(v.$pixelSizeMd);
     line-height: v.$fontLineHeight35;
-    margin: f.pixelToRemSize(32) 0;
+    margin-bottom: f.pixelToRemSize(32);
+
+    @include m.mq {
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeMd);
+      line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 35);
+    }
 
     &::after {
       content: '';
@@ -329,32 +586,64 @@ section.about-contents {
       background-size: contain;
       vertical-align: middle;
       transform: matrix(2, 0.84, -0.84, 2, 0, 0);
+
+      @include m.mq {
+        width: f.spMinRangeVwRemSize(18, v.$spViewPort, 29);
+        height: f.spMinRangeVwRemSize(22.5, v.$spViewPort, 36);
+      }  
     }
   }
 
   .inquiry-btn-common {
     margin: f.pixelToRemSize(17) auto;
     background-color: v.$subPrimaryColor2;
-    border-radius: f.pixelToVwSize(63, 1280);
+    border-radius: f.pixelToVwSize(63, v.$pcViewPort);
     box-shadow: 0px 7px 12px #00000029;
-    max-width: 800px;
+    max-width: 750px;
     width: 100%;
 
+    @include m.mq {
+      width: 78.666%;
+      border-radius: f.pixelToVwSize(126, v.$spViewPort);
+    }
+
     .inquiry-btn-area {
-      display: inline-block;
       padding: f.pixelToRemSize(32) f.pixelToRemSize(47) f.pixelToRemSize(32) f.pixelToRemSize(150);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      @include m.mq {
+        padding: f.spMinRangeVwRemSize(16, v.$spViewPort, 32) f.spMinRangeVwRemSize(32, v.$spViewPort, 47) f.spMinRangeVwRemSize(16, v.$spViewPort, 32) ;
+        text-align: center;
+      }
     }
 
     .inquiry-btn {
       font-size: f.pixelToRemSize(v.$pixelSizeMd);
       line-height: v.$fontLineHeight35;
       font-weight: v.$fontWeightBold;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+      }
     }
 
     .fa-chevron-right::before {
       color: v.$textColor;
       padding-left: f.pixelToRemSize(89);
       font-size: f.pixelToRemSize(v.$pixelSizeMd);
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        padding-left:0;
+        position: absolute;
+        right: f.spMinRangeVwRemSize(32, v.$spViewPort, 48);
+        bottom: f.spMinRangeVwRemSize(32, v.$spViewPort, 50);
+      }
     }
   }
 }
@@ -365,6 +654,11 @@ section.about-contents {
     font-size: f.pixelToRemSize(v.$pixelSizeXl);
     line-height: v.$fontLineHeight52;
     color: v.$subPrimaryColor;
+
+    @include m.mq {
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeLg, v.$spViewPort, v.$pixelSizeXl);
+      line-height: f.spMinRangeVwRemSize(45, v.$spViewPort, 52);
+    }
   }
 
   .reason-contents-item {
@@ -379,12 +673,24 @@ section.about-contents {
     justify-content: center;
     align-items: center;
 
+    @include m.mq {
+      flex-direction: column;
+      padding: f.spMinRangeVwRemSize(32, v.$spViewPort, 40) f.spMinRangeVwRemSize(24, v.$spViewPort, 32);
+      width: 82.933%;
+      margin: f.spMinRangeVwRemSize(40, v.$spViewPort, 48) auto;
+      gap: f.spMinRangeVwRemSize(24, v.$spViewPort, 32);
+    }
+
     &:last-child {
       margin-bottom: 0;
     }
 
     &:nth-child(even) {
       flex-direction: row-reverse;
+
+      @include m.mq {
+        flex-direction: column;
+      }
     }
 
     .reason-contents-item-title {
@@ -395,6 +701,15 @@ section.about-contents {
       font-size: f.pixelToRemSize(v.$pixelSizeMd);
       line-height: v.$fontLineHeight35;
       margin-bottom: f.pixelToRemSize(24);
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+        padding-bottom: f.spMinRangeVwRemSize(4, v.$spViewPort, 8);
+        margin-bottom: 0;
+        width: 100%;
+        order: 1;
+      }
   
       .reason-title-number {
         font-size: f.pixelToRemSize(v.$pixelSizeXl);
@@ -402,6 +717,17 @@ section.about-contents {
         color: v.$subPrimaryColor;
         padding-right: f.pixelToRemSize(24);
         vertical-align: sub;
+
+        @include m.mq {
+          font-size: f.spMinRangeVwRemSize(v.$pixelSizeLg, v.$spViewPort, v.$pixelSizeXl);
+          padding-right: f.spMinRangeVwRemSize(16, v.$spViewPort, 24);
+        }
+      }
+    }
+
+    .reason-contents-item-txt {
+      @include m.mq {
+        order: 3;
       }
     }
   
@@ -409,6 +735,13 @@ section.about-contents {
       width: 100%;
       max-width: 328px;
       height: 251px;
+
+      @include m.mq {
+        order: 2;
+        max-width: none;
+        width: f.spMinRangeVwRemSize(262, v.$spViewPort, 328);
+        height: f.spMinRangeVwRemSize(193, v.$spViewPort, 251);
+      }
   
       img {
         min-width: 328px;
@@ -416,6 +749,10 @@ section.about-contents {
         height: 100%;
         object-fit: cover;
         object-position: center;
+
+        @include m.mq {
+          min-width: inherit;
+        }
       }
     }
   }
@@ -430,19 +767,425 @@ section.about-contents {
     display: flex;
     justify-content: center;
   }
+
+  .course-contents-item {
+    margin: f.pixelToRemSize(85) f.pixelToVwSize(32, v.$pcViewPort) 0 f.pixelToVwSize(77, v.$pcViewPort);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: f.pixelToRemSize(85) f.pixelToVwSize(109, v.$pcViewPort);
+  }
+
+  .course-contents-item-list {
+    width: 436px;
+    height: 801px;
+    background: v.$white;
+    border-radius: f.pixelToRemSize(30);
+    position: relative;
+    box-shadow: 0px 3px 6px #00000029;
+  }
+
+  .open-month {
+    display: block;
+    width: 90px;
+    height: 90px;
+    background: v.$subPrimaryColor;
+    border-radius: 50%;
+    position: absolute;
+    top: -45px;
+    left: -45px;
+
+    .open-month-txt {
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 58%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: v.$white;
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      line-height: v.$fontLineHeight35;
+      font-weight: v.$fontWeightBold;
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  .course-title {
+    display: inline-block;
+    position: relative;
+    min-height: 121px;
+    background: v.$primaryColor;
+    margin: f.pixelToRemSize(56) f.pixelToRemSize(32) 0 f.pixelToRemSize(-32);
+    width: 100%;
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: 100%;
+      left: 0;
+      border: none;
+      border-bottom: solid 32px transparent;
+      border-right: solid 32px v.$courseDecorationColor;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      z-index: 1;
+      top: 0;
+      right: 0;
+      width: 0px;
+      height: 0px;
+      border-width: 60px 32px 60px 0;
+      border-color: transparent v.$white transparent transparent;
+      border-style: solid;
+    }
+
+    .course-title-txt {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      line-height: v.$fontLineHeight35;
+      font-weight: v.$fontWeightBold;
+      color: v.$white;
+      padding: 0 f.pixelToRemSize(56) 0 f.pixelToRemSize(40);
+    }
+  }
+
+  .course-discription-title {
+    font-weight: v.$fontWeightBold;
+  }
+
+  .course-discription-goal-title-frame {
+    width: 356px;
+    min-height: 268px;
+    border: 1px solid v.$primaryColor;
+    border-radius: f.pixelToRemSize(24);
+    margin: f.pixelToRemSize(32) f.pixelToRemSize(40) 0;
+  }
+
+  .course-discription-goal-title {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    top: -14px;
+    left: 0px;
+    margin: 0 f.pixelToRemSize(8);
+    padding: 0 f.pixelToRemSize(8);
+    background: #fff;
+    vertical-align: top;
+  }
+
+  .course-discription-goal-txt {
+    padding: 0 f.pixelToRemSize(24);
+  }
+
+  .course-discription-period-title, .course-discription-orientation-title {
+    margin: f.pixelToRemSize(24) 0 0 f.pixelToRemSize(56);
+  }
+
+  .course-discription-period {
+    display: flex;
+    align-items: center;
+  }
+
+  .course-discription-period-txt {
+    margin: f.pixelToRemSize(24) 0 0 f.pixelToRemSize(16);
+  }
+
+  .course-discription-orientation-title {
+    margin-bottom: f.pixelToRemSize(16);
+  }
+
+  .orientation-date-list {
+    .orientation-date-area {
+      display: flex;
+      align-items: center;
+      margin-left: f.pixelToRemSize(56);
+      margin-bottom: f.pixelToRemSize(8);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .orientation-date-title {
+      font-weight: v.$fontWeightBold;
+      color: v.$white;
+      background: v.$subPrimaryColor;
+      padding: f.pixelToRemSize(4) f.pixelToRemSize(8);
+      display: inline-block;
+    }
+
+    .orientation-date-txt {
+      margin-left: f.pixelToRemSize(16);
+    }
+  }
 }
 
+// 卒業生の作品
+.production-contents {
+  .production-item {
+    width: 100%;
+    height: 200px;
 
+    .slick-list, .slick-track {
+      height: 200px !important; // htmlでcssが設定されているので強制的に上書き
+    }
+
+    .production-item-list.slick-slide {
+      width: 300px !important; // htmlでcssが設定されているので強制的に上書き
+      margin: 0 f.pixelToRemSize(16);
+    }
+
+    picture {
+      display: block;
+      width: 300px;
+      height: 200px;
+      margin: 0;
+      padding: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+// 卒業生の声
+.voice-contents {
+  .voice-item-list {
+    max-width: clamp(690px, f.pixelToVwSize(690, v.$pcViewPort), 800px);
+    width: 100%;
+    margin: f.pixelToRemSize(48) auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: f.pixelToRemSize(40);
+    box-shadow: 0px 5px 10px #00000029;
+    background-color: v.$white;
+    padding: f.pixelToRemSize(32) f.pixelToRemSize(40);
+
+    @include m.mq {
+      width: 293px !important;
+      height: 560px;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 0 f.pixelToRemSize(16);
+    }
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+
+      @include m.mq {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .voice-item-face-name-area {
+    width: 100px;
+    height: 140px;
+
+    .voice-item-face-area {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+
+      .voice-item-face {
+        width: 100%;
+        scale: 1.7;
+        object-fit: fill;
+        object-position: 50% f.pixelToRemSize(5);
+      }
+
+      .voice-item-face-woman2 {
+        scale: 2.4;
+        object-position: 50% f.pixelToRemSize(10);
+      }
+    }
+
+    .voice-item-name {
+      margin-top: f.pixelToRemSize(16);
+      font-weight: v.$fontWeightBold;
+    }
+
+    .sex-txt {
+      font-size: f.pixelToRemSize(v.$pixelSizeXs);
+      line-height: v.$fontLineHeight28;
+    }
+  }
+}
+
+// FAQ
+.faq-contents {
+  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+
+  .faq-contents-area {
+
+    .faq-list {
+      max-width: min(f.pixelToVwSize(900, v.$pcViewPort), 1000px);
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  .faq-category-area {
+    .faq-category-title {
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      font-weight: v.$fontWeightBold;
+      line-height: v.$fontLineHeight35;
+      margin-top: f.pixelToRemSize(40);
+      margin-bottom: f.pixelToRemSize(32);
+
+      &::before {
+        content: '';
+        display: inline-block;
+        background: v.$textColor;
+        height: calc(tan(60deg) * 27.7px * 1 / 2);
+        width: 16px;
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+        margin-right: f.pixelToRemSize(16);
+      }
+    }
+
+    .faq-toggle-area {
+      margin-left: f.pixelToRemSize(32);
+    }
+
+    .faq-question {
+      padding: f.pixelToRemSize(24) f.pixelToRemSize(25) f.pixelToRemSize(24) f.pixelToRemSize(40);
+      border-bottom: dotted 2px v.$faqBorderBottomColor;
+      position: relative;
+      font-size: f.pixelToRemSize(v.$pixelSizeSm);
+      font-weight: v.$fontWeightBold;
+      line-height: v.$fontLineHeight28;
+
+      // 開閉ボタン
+      &::before, &::after {
+        content: '';
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: v.$primaryColor;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.4s;
+      }
+
+      &::after {
+        transform: translateY(-50%) rotate(90deg);
+      }
+
+      p {
+        padding-right: f.pixelToRemSize(16);
+      }
+    }
+
+    .faq-answer {
+        display: none;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      p {
+        padding-right: f.pixelToRemSize(16);
+      }
+    }
+
+    // 「Q」と「A]
+    .faq-question > p::before, .faq-answer > p::before {
+      position: absolute;
+      left: 0;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: v.$white;
+      line-height: v.$fontLineHeight20;
+      text-align: center;
+    }
+
+    .faq-toggle-area:first-of-type > .faq-question:first-of-type {
+      padding-top: 0;
+
+      &::before, &::after {
+        top: 25%;
+        transform: translateY(-25%);
+      }
+
+      &::after {
+        transform: translateY(-25%) rotate(90deg);
+      }
+    }
+
+    .faq-question > p::before {
+      content: 'Q';
+      background-color: v.$primaryColor;
+    }
+
+    .faq-answer > p::before  {
+      content: 'A';
+      background-color: v.$subPrimaryColor;
+      font-weight: v.$fontWeightBold;
+    }
+
+    // Answerが表示された場合
+    .faq-toggle-area.js-faq-answer-open {
+      .faq-question {
+        border: none;
+
+        &::after {
+          transform: translateY(-50%) rotate(0deg);
+        }
+      }
+
+      &:first-of-type > .faq-question:first-of-type {
+        &::after {
+          transform: translateY(-50%) rotate(0deg);
+        }
+      }
+
+      .faq-answer {
+        display: block;
+        margin-bottom: f.pixelToRemSize(24);
+        padding: 0 f.pixelToRemSize(25) f.pixelToRemSize(24) f.pixelToRemSize(40);
+        border-bottom: dotted 2px v.$faqBorderBottomColor;
+        position: relative;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+  
+        p {
+          padding-right: f.pixelToRemSize(16);
+        }
+      }
+    }
+  }
+}
 
 // アクセス
 .access-contents {
   .access-contents-area {
     .access-contents-discription {
-      margin-top: f.pixelToRemSize(48);
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: f.pixelToVwSize(100, 1280);
+      gap: f.pixelToVwSize(100, v.$pcViewPort);
+
+      @include m.mq {
+        flex-direction: column;
+        width: 78.6%;
+        margin: 0 auto;
+      }
     }
   }
 
@@ -453,6 +1196,9 @@ section.about-contents {
 
   .access-contents-txt dl {
     dt {
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      line-height: v.$fontLineHeight35;
+      font-weight: v.$fontWeightBold;
       margin-bottom: f.pixelToRemSize(12);
       margin-top: f.pixelToRemSize(24);
 
@@ -512,6 +1258,75 @@ footer {
 
     small {
       color: v.$white;
+    }
+  }
+}
+
+// トップに戻る
+.return-to-top-btn-area {
+  opacity: 0;
+  visibility: hidden;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: v.$primaryColor;
+  position: fixed;
+  bottom: f.pixelToRemSize(30);
+  right: f.pixelToRemSize(40);
+
+  a {
+    .fa-chevron-right{
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      position: relative;
+
+      &::before {
+        position: absolute;
+        font-size: f.pixelToRemSize(v.$pixelSizeLg);
+        line-height: 70px;
+        color: v.$white;
+        left: 45%;
+        transform: translateX(-45%);
+      }
+    }
+  }
+
+  &.return-to-top-btn-view {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.bottom-inquiry-btn {
+  @include m.mq {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: v.$subPrimaryColor2;
+    border-radius: f.pixelToVwSize(126, v.$spViewPort);
+    box-shadow: 0px 3px 5px #00000065;
+
+    &-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: f.pixelToRemSize(16) f.pixelToRemSize(24);
+    }
+
+    .inquiry-btn {
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+      line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
+      font-weight: v.$fontWeightBold;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .fa-chevron-right::before {
+      color: v.$textColor;
+      padding-left: f.pixelToVwSize(8, v.$spViewPort);
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
     }
   }
 }

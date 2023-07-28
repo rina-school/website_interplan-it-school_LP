@@ -13,14 +13,22 @@ body {
 
 main {
   padding-top: v.$pcHeaderHeight;
+
+  @include m.mq {
+    padding-top: v.$spHeaderHeight;
+  }
 }
 
 section:not(.mv-contents) {
   padding: v.$pcSectionPaddingHeight 0;
 
-  @include m.mq(md) {
+  @include m.mq {
     padding: clamp(56px, f.pixelToVwSize(56, v.$spViewPort), v.$pcSectionPaddingHeight) 0;
   }
+}
+
+section.production-contents {
+  padding-bottom: 0;
 }
 
 h2.section-title {
@@ -28,17 +36,23 @@ h2.section-title {
   font-weight: v.$fontWeightBold;
   line-height: v.$fontLineHeight52;
   text-align: center;
-}
+  margin-bottom: f.pixelToRemSize(48);
 
-dt {
-  font-size: f.pixelToRemSize(v.$pixelSizeMd);
-  line-height: v.$fontLineHeight35;
-  font-weight: v.$fontWeightBold;
+  @include m.mq {
+    font-size: f.spMinRangeVwRemSize(v.$pixelSizeMd, v.$spViewPort, v.$pixelSizeLg);
+    line-height: f.spMinRangeVwRemSize(35, v.$spViewPort, 52);
+    margin-bottom: f.spMinRangeVwRemSize(40, v.$spViewPort, 48);
+  }
 }
 
 p, li, dd {
   font-size: f.pixelToRemSize(v.$pixelSizeSm);
   line-height: v.$fontLineHeight28;
+
+  @include m.mq {
+    font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+    line-height: v.$fontLineHeight28;
+  }
 }
 
 a {
@@ -54,4 +68,3 @@ img {
   font-size: 0;
   line-height: 0;
 }
-

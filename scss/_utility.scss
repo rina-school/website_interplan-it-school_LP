@@ -4,7 +4,7 @@
 .pc-only {
   display: initial;
 
-  @include m.mq(md) {
+  @include m.mq {
     display: none;
   }
 }
@@ -12,7 +12,7 @@
 .sp-only {
   display: none;
 
-  @include m.mq(md) {
+  @include m.mq {
     display: initial;
   }
 }

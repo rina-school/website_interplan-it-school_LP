@@ -1,11 +1,20 @@
 @use 'sass:math';
 
-//viewport幅 === 375px の時に
-//ちょうど$baseSizeとなるvw値を返す
 @function pixelToVwSize($baseSize, $baseViewPort) {
   @return math.div(100, $baseViewPort) * $baseSize * 1vw;
 }
 
 @function pixelToRemSize($size) {
 	@return calc($size / 16) + rem;
+}
+
+// spからpc（最大値）で大きさが可変するものに使用。（例フォントサイズなど）
+@function spMinRangeVwVwSize($baseSize, $baseViewPort, $baseSize2, $baseViewPort2) {
+  @return #{'min('} + pixelToVwSize($baseSize, $baseViewPort) + #{', '}
+    + pixelToVwSize($baseSize2, $baseViewPort2) + #{')'};
+}
+
+@function spMinRangeVwRemSize($baseSize, $baseViewPort, $size) {
+  @return #{'min('} + pixelToVwSize($baseSize, $baseViewPort) + #{', '}
+    + pixelToRemSize($size) + #{')'};
 }

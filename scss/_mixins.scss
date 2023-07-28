@@ -1,13 +1,8 @@
 @use './variables' as v;
 
-@mixin mq($breakpoint: lg) {
-  $maxWidth: v.$breakPointPc;
-
-  @if $breakpoint == md {
-    $maxWidth: v.$breakPointSp;
-  }
-
-  @media screen and (max-width: $maxWidth) {
+// ブレイクポイント960px以下
+@mixin mq {
+  @media screen and (max-width: v.$breakPointPc) {
     @content;
   }
 }
