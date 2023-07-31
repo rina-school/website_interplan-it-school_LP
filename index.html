@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="js/plugin/slick-plugin/slick/slick.css">
     <link rel="stylesheet" href="js/plugin/slick-plugin/slick/slick-theme.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/980a0ef135.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -24,7 +24,7 @@
               <img src="img/svg/logo.svg" alt="インタープランITスクール">
             </a>
           </h1>
-          <div class="header-inquiry-btn pc-only">
+          <div class="header-inquiry-btn pc-only btn-hover-sway shiny-btn">
             <a href="https://hellotraining.interplan-school.com/contact/" class="header-inquiry-btn-area">
               <p class="inquiry-btn">
                 見学会のご予約<span class="pc-only">・</span><span class="sp-only"><br/></span>お問い合わせはコチラ
@@ -32,7 +32,7 @@
               <i class="fa-solid fa-chevron-right"></i>
             </a>
           </div>
-          <button class="header-nav-btn sp-only">
+          <button class="header-nav-btn sp-only" aria-label="ナビゲーション">
             <span class="hamburger-menu"></span>
           </button>
         </div>
@@ -45,7 +45,7 @@
           <li class="nav-list-item"><a href="#production">卒業生の作品・声</a></li>
           <li class="nav-list-item"><a href="#faq">FAQ</a></li>
           <li class="nav-list-item"><a href="#access">アクセス</a></li>
-          <li class="nav-list-item nav-inquiry-btn"><a href="https://hellotraining.interplan-school.com/contact/">お問い合わせ</a></li>
+          <li class="nav-list-item nav-inquiry-btn btn-hover-sway shiny-btn"><a href="https://hellotraining.interplan-school.com/contact/"><span class="pc-only">お問い合わせ</span><span class="sp-only">見学会のご予約・お問い合わせ</span></a></li>
         </ul>
       </nav>
     </header>
@@ -66,7 +66,7 @@
         <div class="mv-img-area">
           <picture>
             <source srcset="img/webp/mv.webp" type="image/webp">
-            <img src="img/mv.jpg" class="mv-img">
+            <img src="img/mv.jpg" alt="メインビジュアル" class="mv-img">
           </picture>
         </div>
       </section>
@@ -81,6 +81,7 @@
             </p>
           </div>
           <div class="about-img-area">
+            <div class="about-bg-box"></div>
             <picture>
               <source srcset="img/webp/lesson.webp" type="image/webp">
               <img src="img/lesson.jpg" alt="授業風景" class="about-img">
@@ -140,7 +141,7 @@
             </div>
           </div>
           <p class="inquiry-txt-area">疑問点や悩みを見学会で解消しよう</p>
-          <div class="inquiry-btn-common">
+          <div class="inquiry-btn-common btn-hover-sway shiny-btn">
             <a href="https://hellotraining.interplan-school.com/contact/" class="inquiry-btn-area">
               <p class="inquiry-btn">
                 見学会のご予約<span class="pc-only">・</span><span class="sp-only"><br/></span>お問い合わせはコチラ
@@ -169,7 +170,7 @@
             <div class="reason-contents-item-img-area">
               <picture>
                 <source srcset="img/webp/teacher.webp" type="image/webp">
-                <img src="img/teacher.jpg">
+                <img src="img/teacher.jpg" alt="講師イメージ">
               </picture>
             </div>
           </div>
@@ -186,7 +187,7 @@
             <div class="reason-contents-item-img-area">
               <picture>
                 <source srcset="img/webp/textbook.webp" type="image/webp">
-                <img src="img/textbook.jpg">
+                <img src="img/textbook.jpg" alt="教材イメージ">
               </picture>
             </div>
           </div>
@@ -197,14 +198,14 @@
               </h3>
               <p class="reason-contents-item-txt js-reason-contents-item-03">
                 訓練では受講生おひとりに1台ずつWindowsノートパソコンを準備しております。（通学コースかつ、通学時のみ使用可能。）<br/>
-                受講中並びに卒業後半年間はおひとりずつ専用のサーバーアカウントの無料貸与も致します。サイトを実際に公開することで、就職活動で企業に「ポートフォリオ」（作品実績）をアピールすることができます。<br/>
+                受講中並びに卒業後半年間はおひとりずつ専用の <span class="txt-underline">サーバーアカウントの無料貸与</span> も致します。サイトを実際に公開することで、就職活動で企業に「ポートフォリオ」（作品実績）をアピールすることができます。<br/>
                 また、日々の講義やeラーニングだけではなく、Web制作環境を存分に活用いただける自習室も完備しています。
               </p>
             </div>
             <div class="reason-contents-item-img-area">
               <picture>
-                <source srcset="img/webp/server.webp" type="image/webp">
-                <img src="img/server.jpg">
+                <source srcset="img/webp/laptop.webp" type="image/webp">
+                <img src="img/laptop.jpg" alt="パソコン">
               </picture>
             </div>
           </div>
@@ -222,7 +223,7 @@
             <div class="reason-contents-item-img-area">
               <picture>
                 <source srcset="img/webp/careerConsulting.webp" type="image/webp">
-                <img src="img/careerConsulting.jpg">
+                <img src="img/careerConsulting.jpg" alt="面談イメージ">
               </picture>
             </div>
           </div>
@@ -233,7 +234,7 @@
           <h2 class="section-title">コース紹介</h2>
           <p class="course-contents-txt">
             下記は現在募集中のコース概要からの一部抜粋になります。<br/>
-            開講時期により募集コースは異なります。詳しくはお問い合わせください。
+            開講時期により募集コースは異なります。<span class="sp-only"><br/></span>詳しくはお問い合わせください。
           </p>
           <div class="course-contents-item">
             <div class="course-contents-item-list">
@@ -468,7 +469,7 @@
             </div>
           </div>
           <p class="inquiry-txt-area">疑問点や悩みを見学会で解消しよう</p>
-          <div class="inquiry-btn-common">
+          <div class="inquiry-btn-common btn-hover-sway shiny-btn">
             <a href="https://hellotraining.interplan-school.com/contact/" class="inquiry-btn-area">
               <p class="inquiry-btn">
                 見学会のご予約<span class="pc-only">・</span><span class="sp-only"><br/></span>お問い合わせはコチラ
@@ -767,7 +768,7 @@
             </div>
           </div>
           <p class="inquiry-txt-area">疑問点や悩みを見学会で解消しよう</p>
-          <div class="inquiry-btn-common">
+          <div class="inquiry-btn-common btn-hover-sway shiny-btn">
             <a href="https://hellotraining.interplan-school.com/contact/" class="inquiry-btn-area">
               <p class="inquiry-btn">
                 見学会のご予約<span class="pc-only">・</span><span class="sp-only"><br/></span>お問い合わせはコチラ
@@ -828,13 +829,15 @@
       </a>
 		</div>
 
-    <div class="bottom-inquiry-btn sp-only">
-      <a href="https://hellotraining.interplan-school.com/contact/" class="bottom-inquiry-btn-area">
-        <p class="inquiry-btn">
-          見学会のご予約・お問い合わせはコチラ
-        </p>
-        <i class="fa-solid fa-chevron-right"></i>
-      </a>
+    <div class="bottom-inquiry-btn-fixed">
+      <div class="bottom-inquiry-btn sp-only btn-hover-sway-bottom shiny-btn">
+        <a href="https://hellotraining.interplan-school.com/contact/" class="bottom-inquiry-btn-area">
+          <p class="inquiry-btn">
+            見学会のご予約・お問い合わせはコチラ
+          </p>
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
     </div>
 
     <script src="js/jquery-3.7.0.min.js"></script>

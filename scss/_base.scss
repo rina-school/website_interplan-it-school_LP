@@ -23,12 +23,12 @@ section:not(.mv-contents) {
   padding: v.$pcSectionPaddingHeight 0;
 
   @include m.mq {
-    padding: clamp(56px, f.pixelToVwSize(56, v.$spViewPort), v.$pcSectionPaddingHeight) 0;
+    padding: clamp(56px, f.pixelToVwSize(72, v.$spViewPort), v.$pcSectionPaddingHeight) 0;
   }
 }
 
 section.production-contents {
-  padding-bottom: 0;
+  padding-bottom: f.pixelToRemSize(40);
 }
 
 h2.section-title {

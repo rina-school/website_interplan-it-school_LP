@@ -29,7 +29,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -113,29 +112,29 @@ header {
     
       .hamburger-menu::before {
         // 負の数の方が小さいので敢えてmaxを使用
-        top: max(f.pixelToVwSize(-9, 375), f.pixelToRemSize(-13));
+        top: max(f.pixelToVwSize(-9, v.$spViewPort), f.pixelToRemSize(-13));
       }
     
       .hamburger-menu::after {
         top: f.spMinRangeVwRemSize(9, v.$spViewPort, 13);
       }
 
-      // headerにjs-nav-activeが追加されたとき
-      header.js-nav-active & .hamburger-menu {
+      // headerにjs-nav-sp-activeが追加されたとき
+      header.js-nav-sp-active & .hamburger-menu {
         background: transparent;
       }
 
-      header.js-nav-active & .hamburger-menu::before
-      , header.js-nav-active & .hamburger-menu::after {
+      header.js-nav-sp-active & .hamburger-menu::before
+      , header.js-nav-sp-active & .hamburger-menu::after {
         top: 0;
         background: v.$primaryColor;
       }
 
-      header.js-nav-active & .hamburger-menu::before {
+      header.js-nav-sp-active & .hamburger-menu::before {
         transform: rotate(45deg);
       }
 
-      header.js-nav-active & .hamburger-menu::after {
+      header.js-nav-sp-active & .hamburger-menu::after {
         transform: rotate(-45deg);
       }
     }
@@ -149,18 +148,53 @@ header {
   bottom: 0;
   left: 0;
 
+  @include m.mq {
+    position: fixed;
+    width: auto;
+    height: calc(100% - v.$spHeaderHeight);
+    top: v.$spHeaderHeight;
+    right: 0;
+    bottom: initial;
+    left: initial;
+    text-align: center;
+    background-color: rgba(v.$white, 0.95); 
+    transform: translateX(125%);
+    transition: .3s ease;
+    z-index: v.$zindexHeader;
+
+    header.js-nav-sp-active & {
+      transform: translateX(0);
+    }
+  }
+
   .nav-list {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    max-width: 928px;
+    gap: f.pixelToRemSize(32);
     width: 100%;
-    margin: f.pixelToRemSize(16) auto;
+    margin: f.pixelToRemSize(16) 0;
+
+    @include m.mq {
+      flex-direction: column;
+      gap: f.spMinRangeVwRemSize(32, v.$spViewPort, 40);
+      align-items: flex-start;
+      margin: f.pixelToRemSize(40) f.spMinRangeVwRemSize(40, v.$spViewPort, 96) 0;
+    }
 
     .nav-list-item {
       font-size: f.pixelToRemSize(v.$pixelSizeSm);
       line-height: v.$fontLineHeight28;
       font-weight: v.$fontWeightBold;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+        line-height: min(f.pixelToVwSize(20, v.$spViewPort), v.$fontLineHeight28);
+      }
+
+      &:not(:last-of-type) > a:hover {
+        color: v.$primaryColor;
+      }
     }
 
     .nav-inquiry-btn {
@@ -169,17 +203,13 @@ header {
       border-radius: f.pixelToRemSize(28);
     }
   }
-
-  @include m.mq {
-    display: none;
-  }
 }
 
 // メインビジュアル
 .mv-contents {
   width: 100%;
   height: calc(100vh - v.$pcHeaderHeight - v.$pcNavHeight);
-  background: v.$mvBgColor url(../../img/mv-bg.png) center center/cover;
+  background: v.$mvBgColor url(../img/mv-bg.png) center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,8 +231,8 @@ header {
 
       @include m.mq {
         font-size: f.spMinRangeVwRemSize(v.$pixelSizeLg, v.$spViewPort, v.$pixelSizeXl);
-        line-height: min(f.pixelToVwSize(35, 375), v.$fontLineHeight58);
-        letter-spacing: min(f.pixelToVwSize(3.6, 375), v.$fontCharacterSpacing4-8);
+        line-height: min(f.pixelToVwSize(35, v.$spViewPort), v.$fontLineHeight58);
+        letter-spacing: min(f.pixelToVwSize(3.6, v.$spViewPort), v.$fontCharacterSpacing4-8);
       }
     }
 
@@ -214,8 +244,8 @@ header {
 
       @include m.mq {
         font-size: f.spMinRangeVwRemSize(v.$pixelSizeMd, v.$spViewPort, v.$pixelSizeCathCopy);
-        line-height: min(f.pixelToVwSize(35, 375), v.$fontLineHeight58);
-        letter-spacing: min(f.pixelToVwSize(3.6, 375), v.$fontCharacterSpacing4);
+        line-height: min(f.pixelToVwSize(35, v.$spViewPort), v.$fontLineHeight58);
+        letter-spacing: min(f.pixelToVwSize(3.6, v.$spViewPort), v.$fontCharacterSpacing4);
       }
     }
 
@@ -227,7 +257,7 @@ header {
 
       @include m.mq {
         font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
-        line-height: min(f.pixelToVwSize(35, 375), v.$fontLineHeight28);
+        line-height: min(f.pixelToVwSize(35, v.$spViewPort), v.$fontLineHeight28);
       }
     }
 
@@ -239,7 +269,7 @@ header {
 
       @include m.mq {
         font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
-        line-height: min(f.pixelToVwSize(17, 375), v.$fontLineHeight20);
+        line-height: min(f.pixelToVwSize(17, v.$spViewPort), v.$fontLineHeight20);
         margin: f.spMinRangeVwRemSize(16, v.$spViewPort, 24) 0;
       }
     }
@@ -262,7 +292,7 @@ header {
           width: f.spMinRangeVwRemSize(70, v.$spViewPort, 95);
           height: f.spMinRangeVwRemSize(70, v.$spViewPort, 95);
           font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
-          line-height: min(f.pixelToVwSize(17, 375), v.$fontLineHeight20);
+          line-height: min(f.pixelToVwSize(17, v.$spViewPort), v.$fontLineHeight20);
         }
 
         span {
@@ -303,7 +333,7 @@ header {
 // インタープランについて
 section.about-contents {
   padding-top: calc(v.$pcNavHeight + v.$pcSectionPaddingHeight);
-  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+  background: linear-gradient(rgba(v.$white, 0.4), rgba(v.$white, 0.4)), url(../img/bg_paper.png) center center/cover;
 
   @include m.mq {
     padding-top: v.$spSectionPaddingHeight;
@@ -353,18 +383,30 @@ section.about-contents {
       width: 100%;
       max-width: 360px;
       height: 300px;
+      position: relative;
 
       @include m.mq {
-        width: min(f.pixelToVwSize(194, v.$spViewPort), 360px);
-        height: min(f.pixelToVwSize(162, v.$spViewPort), 300px);
+        width: f.spMinRangeVwRemSize(194, v.$spViewPort, 360);
+        height: f.spMinRangeVwRemSize(162, v.$spViewPort, 300);
+        margin-bottom: f.spMinRangeVwRemSize(24, v.$spViewPort, 32);
         order: 2;
       }
 
+      .about-bg-box {
+        position: absolute;
+        width: 95%;
+        height: 95%;
+        background: v.$primaryColor;
+        top: 5%;
+        left: 5%;
+      }
+
       .about-img {
+        position: absolute;
         object-fit: cover;
         object-position: center;
-        width: 100%;
-        height: 100%;
+        width: 95%;
+        height: 95%;
       }
     }
   }
@@ -445,7 +487,7 @@ section.about-contents {
 
 // 卒業生インタビュー
 .interview-contents {
-  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+  background: linear-gradient(rgba(v.$white, 0.4), rgba(v.$white, 0.4)), url(../img/bg_paper.png) center center/cover;
 
   .interview-contents-area {
     margin: 0 auto;
@@ -479,7 +521,7 @@ section.about-contents {
 // 見学会予約・問い合わせ
 .inquiry-contents {
   width: 100%;
-  background: linear-gradient(rgba(v.$inquiryBgColor, .88), rgba(v.$inquiryBgColor, .88)), url(../../img/inquiry-bg.jpeg) center center/cover no-repeat;
+  background: linear-gradient(rgba(v.$inquiryBgColor, .88), rgba(v.$inquiryBgColor, .88)), url(../img/inquiry-bg.jpeg) center center/cover no-repeat;
 
   &-area {
     .inquiry-contents-point-in-questions {
@@ -491,7 +533,7 @@ section.about-contents {
       align-items: center;
       gap: f.pixelToRemSize(24);
       margin: 0 auto f.pixelToRemSize(56);
-      padding: f.pixelToRemSize(16) f.pixelToRemSize(32);
+      padding: f.pixelToRemSize(32);
 
       @include m.mq {
         width: 73.333%;
@@ -525,10 +567,12 @@ section.about-contents {
       font-size: f.pixelToRemSize(v.$pixelSizeXs);
       line-height: v.$fontLineHeight20;
       padding-left: f.pixelToRemSize(v.$pixelSizeXs);
+      white-space: nowrap;
 
       @include m.mq {
         padding-left: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
         font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+        white-space: wrap;
       }
 
       &::before {
@@ -760,20 +804,27 @@ section.about-contents {
 
 // コース紹介
 .course-contents {
-  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+  background: linear-gradient(rgba(v.$white, 0.4), rgba(v.$white, 0.4)), url(../img/bg_paper.png) center center/cover;
 
   .course-contents-txt {
     margin: f.pixelToRemSize(40) auto;
     display: flex;
     justify-content: center;
+
+    @include m.mq {
+      width: 80%;
+      display: block;
+      white-space: wrap;
+    }
   }
 
   .course-contents-item {
-    margin: f.pixelToRemSize(85) f.pixelToVwSize(32, v.$pcViewPort) 0 f.pixelToVwSize(77, v.$pcViewPort);
+    margin: f.pixelToRemSize(85) auto 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: f.pixelToRemSize(85) f.pixelToVwSize(109, v.$pcViewPort);
+    width: 90%;
   }
 
   .course-contents-item-list {
@@ -783,6 +834,12 @@ section.about-contents {
     border-radius: f.pixelToRemSize(30);
     position: relative;
     box-shadow: 0px 3px 6px #00000029;
+    margin-left: f.pixelToRemSize(32);
+
+    @include m.mq {
+      width: 98%;
+      margin-left: f.spMinRangeVwRemSize(16, v.$spViewPort, 32);
+    }
   }
 
   .open-month {
@@ -793,7 +850,15 @@ section.about-contents {
     border-radius: 50%;
     position: absolute;
     top: -45px;
-    left: -45px;
+    left: -32px;
+
+    @include m.mq {
+      width: f.spMinRangeVwRemSize(90, v.$spViewPort, 180);
+      height: f.spMinRangeVwRemSize(40, v.$spViewPort, 80);
+      border-radius: f.spMinRangeVwRemSize(16, v.$spViewPort, 24);
+      top: max(f.pixelToVwSize(-20, v.$spViewPort), -30px);
+      left: max(f.pixelToVwSize(-16, v.$spViewPort), -32px);
+    }
 
     .open-month-txt {
       display: inline-block;
@@ -808,6 +873,16 @@ section.about-contents {
       font-weight: v.$fontWeightBold;
       width: 90px;
       height: 90px;
+
+      @include m.mq {
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+        width: auto;
+        height: auto;
+        padding: f.pixelToVwSize(8, v.$spViewPort) f.pixelToVwSize(16, v.$spViewPort);
+      }
     }
   }
 
@@ -819,6 +894,11 @@ section.about-contents {
     margin: f.pixelToRemSize(56) f.pixelToRemSize(32) 0 f.pixelToRemSize(-32);
     width: 100%;
 
+    @include m.mq {
+      height: f.spMinRangeVwRemSize(87, v.$spViewPort, 90);
+      margin: f.pixelToRemSize(56) f.spMinRangeVwRemSize(16, v.$spViewPort, 32) 0 max(f.pixelToVwSize(-16, v.$spViewPort), -32px);
+    }
+
     &::before {
       position: absolute;
       content: '';
@@ -827,12 +907,17 @@ section.about-contents {
       border: none;
       border-bottom: solid 32px transparent;
       border-right: solid 32px v.$courseDecorationColor;
+
+      @include m.mq {
+        border-bottom: solid f.spMinRangeVwRemSize(16, v.$spViewPort, 32) transparent;
+        border-right: solid f.spMinRangeVwRemSize(16, v.$spViewPort, 32) v.$courseDecorationColor;
+      }
     }
 
     &::after {
       position: absolute;
       content: '';
-      z-index: 1;
+      z-index: v.$zindexCourseDecoration;
       top: 0;
       right: 0;
       width: 0px;
@@ -840,6 +925,10 @@ section.about-contents {
       border-width: 60px 32px 60px 0;
       border-color: transparent v.$white transparent transparent;
       border-style: solid;
+
+      @include m.mq {
+        border-width: 60px f.spMinRangeVwRemSize(24, v.$spViewPort, 32) 60px 0;
+      }
     }
 
     .course-title-txt {
@@ -851,6 +940,11 @@ section.about-contents {
       font-weight: v.$fontWeightBold;
       color: v.$white;
       padding: 0 f.pixelToRemSize(56) 0 f.pixelToRemSize(40);
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+      }
     }
   }
 
@@ -864,6 +958,12 @@ section.about-contents {
     border: 1px solid v.$primaryColor;
     border-radius: f.pixelToRemSize(24);
     margin: f.pixelToRemSize(32) f.pixelToRemSize(40) 0;
+
+    @include m.mq {
+      width: auto;
+      margin: f.spMinRangeVwRemSize(24, v.$spViewPort, 35);
+      min-height: unset;
+    }
   }
 
   .course-discription-goal-title {
@@ -880,10 +980,20 @@ section.about-contents {
 
   .course-discription-goal-txt {
     padding: 0 f.pixelToRemSize(24);
+
+    @include m.mq {
+      width: auto;
+      padding: 0 f.spMinRangeVwRemSize(16, v.$spViewPort, 24) f.pixelToRemSize(24);
+    }
   }
 
   .course-discription-period-title, .course-discription-orientation-title {
     margin: f.pixelToRemSize(24) 0 0 f.pixelToRemSize(56);
+
+    @include m.mq {
+      white-space: nowrap;
+      margin: 0 0 0 f.pixelToRemSize(56);
+    }
   }
 
   .course-discription-period {
@@ -893,6 +1003,11 @@ section.about-contents {
 
   .course-discription-period-txt {
     margin: f.pixelToRemSize(24) 0 0 f.pixelToRemSize(16);
+    
+    @include m.mq {
+      white-space: nowrap;
+      margin: 0 0 0 f.pixelToRemSize(24);
+    }
   }
 
   .course-discription-orientation-title {
@@ -957,6 +1072,12 @@ section.about-contents {
 
 // 卒業生の声
 .voice-contents {
+  .slick-track {
+    @include m.mq {
+      display: flex;
+    }
+  } 
+
   .voice-item-list {
     max-width: clamp(690px, f.pixelToVwSize(690, v.$pcViewPort), 800px);
     width: 100%;
@@ -964,17 +1085,19 @@ section.about-contents {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: f.pixelToRemSize(40);
     box-shadow: 0px 5px 10px #00000029;
     background-color: v.$white;
     padding: f.pixelToRemSize(32) f.pixelToRemSize(40);
+    gap: f.pixelToRemSize(40);
 
     @include m.mq {
-      width: 293px !important;
-      height: 560px;
+      width: f.spMinRangeVwRemSize(293, v.$spViewPort, 500) !important;
+      height: auto;
       flex-direction: column;
       justify-content: space-between;
-      margin: 0 f.pixelToRemSize(16);
+      gap: f.pixelToRemSize(24);
+      margin: 0 0.4% f.pixelToRemSize(24) 0;
+      flex-shrink: 0;
     }
 
     &:nth-child(even) {
@@ -986,14 +1109,37 @@ section.about-contents {
     }
   }
 
+  @include m.mq {
+    .slick-prev {
+      left: f.pixelToRemSize(24);
+      z-index: v.$zindexSpSlickArrowBtn;
+    }
+
+    .slick-next {
+      right: f.pixelToRemSize(24);
+    }
+
+    .slick-prev:before,
+    .slick-next:before
+    {
+      color: v.$textColor;
+      font-size: f.pixelToRemSize(v.$pixelSizeMd);
+      background: v.$white;
+      border-radius: 50%;
+    }
+  }
+
   .voice-item-face-name-area {
     width: 100px;
     height: 140px;
 
     .voice-item-face-area {
-      width: 100px;
-      height: 100px;
+      max-width: 100px;
+      width: f.pixelToVwSize(100, v.$spViewPort);
+      max-height: 100px;
+      height: f.pixelToVwSize(100, v.$spViewPort);
       border-radius: 50%;
+      margin: 0 auto;
       overflow: hidden;
 
       .voice-item-face {
@@ -1012,25 +1158,41 @@ section.about-contents {
     .voice-item-name {
       margin-top: f.pixelToRemSize(16);
       font-weight: v.$fontWeightBold;
+      font-size: f.pixelToRemSize(v.$pixelSizeSm);
+      line-height: v.$fontLineHeight28;
+      text-align: center;
+
+      @include m.mq {
+        font-size:f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+        line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
+      }
     }
 
     .sex-txt {
       font-size: f.pixelToRemSize(v.$pixelSizeXs);
       line-height: v.$fontLineHeight28;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+        line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
+      }
     }
   }
 }
 
 // FAQ
 .faq-contents {
-  background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(../../img/bg_paper.png) center center/cover;
+  background: linear-gradient(rgba(v.$white, 0.4), rgba(v.$white, 0.4)), url(../img/bg_paper.png) center center/cover;
 
   .faq-contents-area {
-
     .faq-list {
-      max-width: min(f.pixelToVwSize(900, v.$pcViewPort), 1000px);
-      width: 100%;
+      width: min(f.pixelToVwSize(900, v.$pcViewPort), 1000px);
       margin: 0 auto;
+
+      @include m.mq {
+        width: f.spMinRangeVwRemSize(293, v.$spViewPort, 1000);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+      }
     }
   }
 
@@ -1040,7 +1202,12 @@ section.about-contents {
       font-weight: v.$fontWeightBold;
       line-height: v.$fontLineHeight35;
       margin-top: f.pixelToRemSize(40);
-      margin-bottom: f.pixelToRemSize(32);
+      margin-bottom: f.pixelToRemSize(8);
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+      }
 
       &::before {
         content: '';
@@ -1050,20 +1217,35 @@ section.about-contents {
         width: 16px;
         clip-path: polygon(0 0, 100% 50%, 0 100%);
         margin-right: f.pixelToRemSize(16);
+
+        @include m.mq {
+          height: calc(tan(60deg) * f.spMinRangeVwRemSize(14, v.$spViewPort, 27.7) * 1 / 2);
+          width: f.spMinRangeVwRemSize(8, v.$spViewPort, 16);
+          margin-right: f.spMinRangeVwRemSize(8, v.$spViewPort, 16);
+        }
       }
     }
 
     .faq-toggle-area {
       margin-left: f.pixelToRemSize(32);
+      border-bottom: dotted 2px v.$faqBorderBottomColor;
+
+      @include m.mq {
+        margin-left: f.spMinRangeVwRemSize(16, v.$spViewPort, 32);
+      }
     }
 
     .faq-question {
       padding: f.pixelToRemSize(24) f.pixelToRemSize(25) f.pixelToRemSize(24) f.pixelToRemSize(40);
-      border-bottom: dotted 2px v.$faqBorderBottomColor;
       position: relative;
       font-size: f.pixelToRemSize(v.$pixelSizeSm);
       font-weight: v.$fontWeightBold;
       line-height: v.$fontLineHeight28;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+        line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
+      }
 
       // 開閉ボタン
       &::before, &::after {
@@ -1074,13 +1256,16 @@ section.about-contents {
         background-color: v.$primaryColor;
         position: absolute;
         right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        top: f.pixelToRemSize(38);
         transition: transform 0.4s;
+
+        @include m.mq {
+          width: f.spMinRangeVwRemSize(16, v.$spViewPort, 25);
+        }
       }
 
       &::after {
-        transform: translateY(-50%) rotate(90deg);
+        transform: rotate(90deg);
       }
 
       p {
@@ -1089,7 +1274,10 @@ section.about-contents {
     }
 
     .faq-answer {
-        display: none;
+      display: none;
+      margin-bottom: f.pixelToRemSize(24);
+      padding: 0 f.pixelToRemSize(25) f.pixelToRemSize(24) f.pixelToRemSize(40);
+      position: relative;
 
       &:last-child {
         margin-bottom: 0;
@@ -1111,63 +1299,32 @@ section.about-contents {
       color: v.$white;
       line-height: v.$fontLineHeight20;
       text-align: center;
-    }
 
-    .faq-toggle-area:first-of-type > .faq-question:first-of-type {
-      padding-top: 0;
-
-      &::before, &::after {
-        top: 25%;
-        transform: translateY(-25%);
-      }
-
-      &::after {
-        transform: translateY(-25%) rotate(90deg);
+      @include m.mq {
+        width: f.spMinRangeVwRemSize(20, v.$spViewPort, 24);
+        height: f.spMinRangeVwRemSize(20, v.$spViewPort, 24);
+        line-height: f.spMinRangeVwRemSize(18, v.$spViewPort, 20);
       }
     }
 
     .faq-question > p::before {
       content: 'Q';
       background-color: v.$primaryColor;
+      top: f.pixelToRemSize(28);
     }
 
     .faq-answer > p::before  {
       content: 'A';
       background-color: v.$subPrimaryColor;
       font-weight: v.$fontWeightBold;
+      top: f.pixelToRemSize(4);
     }
+  }
 
-    // Answerが表示された場合
-    .faq-toggle-area.js-faq-answer-open {
-      .faq-question {
-        border: none;
-
-        &::after {
-          transform: translateY(-50%) rotate(0deg);
-        }
-      }
-
-      &:first-of-type > .faq-question:first-of-type {
-        &::after {
-          transform: translateY(-50%) rotate(0deg);
-        }
-      }
-
-      .faq-answer {
-        display: block;
-        margin-bottom: f.pixelToRemSize(24);
-        padding: 0 f.pixelToRemSize(25) f.pixelToRemSize(24) f.pixelToRemSize(40);
-        border-bottom: dotted 2px v.$faqBorderBottomColor;
-        position: relative;
-  
-        &:last-child {
-          margin-bottom: 0;
-        }
-  
-        p {
-          padding-right: f.pixelToRemSize(16);
-        }
-      }
+  // Answerが表示された場合
+  .faq-toggle-area.js-faq-open {
+    .faq-question::after {
+      transform: rotate(0deg);
     }
   }
 }
@@ -1184,14 +1341,31 @@ section.about-contents {
       @include m.mq {
         flex-direction: column;
         width: 78.6%;
+        align-items: center;
         margin: 0 auto;
+        gap: f.pixelToVwSize(32, v.$spViewPort);
       }
     }
   }
 
   .access-contents-googlemap {
     width: 395px;
-    height: 233px;
+    aspect-ratio: 16 / 9;
+
+    @include m.mq {
+      width: 100%;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+
+      @include m.mq {
+        width: min(100%, 720px);
+        height: min(100%, 405px);
+      }
+    }
   }
 
   .access-contents-txt dl {
@@ -1201,6 +1375,11 @@ section.about-contents {
       font-weight: v.$fontWeightBold;
       margin-bottom: f.pixelToRemSize(12);
       margin-top: f.pixelToRemSize(24);
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+        line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
+      }
 
       &:first-of-type {
         margin-top: 0;
@@ -1214,6 +1393,11 @@ section.about-contents {
     .access-station {
       font-size: f.pixelToRemSize(v.$pixelSizeSm);
       line-height: v.$fontLineHeight28;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+        line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
+      }
     }
 
     .access-route {
@@ -1223,12 +1407,20 @@ section.about-contents {
     .access-tel-reception-time {
       // 電話マークの分だけ余白を開ける
       margin-left: f.pixelToRemSize(28);
+
+      @include m.mq {
+        margin-left: f.spMinRangeVwRemSize(22, v.$spViewPort, 28);
+      }
     }
   }
 
   .fa-phone::before, .fa-envelope {
     font-size: f.pixelToRemSize(20);
     margin-right: f.pixelToRemSize(8);
+
+    @include m.mq {
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, 20);
+    }
   }
 }
 
@@ -1237,17 +1429,32 @@ footer {
   background-color: v.$primaryColor;
   padding: f.pixelToRemSize(24) 0;
 
+  @include m.mq {
+    padding-bottom: f.spMinRangeVwRemSize(80, v.$spViewPort, 96); 
+  }
+
   .footer-nav-list {
     display: flex;
     justify-content: center;
     gap: 0 f.pixelToRemSize(72);
     margin-bottom: f.pixelToRemSize(16);
 
+    @include m.mq {
+      flex-direction: column;
+      align-items: center;
+      gap: f.pixelToRemSize(8) 0;
+    }
+
 
     .footer-nav-list-item a {
       font-size: f.pixelToRemSize(v.$pixelSizeXs);
       line-height: v.$fontLineHeight20;
       color: v.$white;
+
+      @include m.mq {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+        line-height: f.spMinRangeVwRemSize(17, v.$spViewPort, 20);
+      }
     }
   }
 
@@ -1255,6 +1462,11 @@ footer {
     text-align: center;
     font-size: f.pixelToRemSize(v.$pixelSizeXs);
     line-height: v.$fontLineHeight20;
+
+    @include m.mq {
+      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
+      line-height: f.spMinRangeVwRemSize(17, v.$spViewPort, 20);
+    }
 
     small {
       color: v.$white;
@@ -1273,6 +1485,14 @@ footer {
   position: fixed;
   bottom: f.pixelToRemSize(30);
   right: f.pixelToRemSize(40);
+  z-index: v.$zindexSpBottomBtn;
+
+  @include m.mq {
+    width: f.spMinRangeVwRemSize(30, v.$spViewPort, 50);
+    height: f.spMinRangeVwRemSize(30, v.$spViewPort, 50);
+    bottom: f.spMinRangeVwRemSize(96, v.$spViewPort, 96);
+    right: f.spMinRangeVwRemSize(16, v.$spViewPort, 24);
+  }
 
   a {
     .fa-chevron-right{
@@ -1288,6 +1508,11 @@ footer {
         color: v.$white;
         left: 45%;
         transform: translateX(-45%);
+
+        @include m.mq {
+          font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
+          line-height: f.spMinRangeVwRemSize(30, v.$spViewPort, 50);
+        }
       }
     }
   }
@@ -1298,38 +1523,51 @@ footer {
   }
 }
 
-.bottom-inquiry-btn {
+.bottom-inquiry-btn-fixed {
   @include m.mq {
     position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: v.$subPrimaryColor2;
-    border-radius: f.pixelToVwSize(126, v.$spViewPort);
-    box-shadow: 0px 3px 5px #00000065;
+    width: 100%;
+    background: transparent;
+    bottom: 0;
+    z-index: v.$zindexSpBottomBtn;
+  }
 
-    &-area {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: f.pixelToRemSize(16) f.pixelToRemSize(24);
-    }
-
-    .inquiry-btn {
-      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
-      line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
-      font-weight: v.$fontWeightBold;
-      width: 100%;
-      white-space: nowrap;
-    }
-
-    .fa-chevron-right::before {
-      color: v.$textColor;
-      padding-left: f.pixelToVwSize(8, v.$spViewPort);
-      font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+  .bottom-inquiry-btn {
+    @include m.mq {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-block;
+      background-color: v.$subPrimaryColor2;
+      border-radius: f.pixelToVwSize(126, v.$spViewPort);
+      box-shadow: 0px 3px 5px #00000065;
+  
+      &-area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: f.pixelToRemSize(16) f.pixelToRemSize(24);
+      }
+  
+      .inquiry-btn {
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+        line-height: f.spMinRangeVwRemSize(20, v.$spViewPort, 28);
+        font-weight: v.$fontWeightBold;
+        width: 100%;
+        white-space: nowrap;
+      }
+  
+      .fa-chevron-right::before {
+        color: v.$textColor;
+        padding-left: f.pixelToVwSize(8, v.$spViewPort);
+        font-size: f.spMinRangeVwRemSize(v.$pixelSizeXs, v.$spViewPort, v.$pixelSizeSm);
+      }
     }
   }
 }
+
+
 
 
 

@@ -52,9 +52,11 @@ $breakPointPc: 960px;
 $pcHeaderHeight: 90px;
 $pcNavHeight: 76px;
 $pcSectionPaddingHeight: 104px;
-$spHeaderHeight: min(f.pixelToVwSize(70, 375), $pcHeaderHeight);
+$spHeaderHeight: min(f.pixelToVwSize(60, 375), $pcHeaderHeight);
 $spSectionPaddingHeight: 64px;
 
 // z-index
-$zindexHeader: 100;
-$zindexSpSidebtn: 10;
+$zindexHeader: 1000;
+$zindexSpBottomBtn: 100;
+$zindexSpSlickArrowBtn: 10;
+$zindexCourseDecoration: 1;
