@@ -23,7 +23,7 @@
   text-underline-offset: 1.5px;
 }
 
-.btn-hover-sway:hover {
+.btn-hover-sway:hover.animetion-active, .btn-hover-sway-auto:hover.animetion-active {
 	transition: 0.5s;
 	animation: move_sway 2s infinite;
 }
@@ -37,7 +37,7 @@
   30% {transform: translate(0px, 0px);}
 }
 
-.btn-hover-sway-bottom:hover {
+.btn-hover-sway-bottom:hover.animetion-active, .btn-hover-sway-bottom-auto:hover.animetion-active {
 	transition: 0.5s;
 	animation: move_sway_bottom 2s infinite;
 }
@@ -51,12 +51,12 @@
   30% {transform: translate(calc(0px + -50%), 0px);}
 }
 
-.shiny-btn {
+.shiny-btn, .shiny-btn-auto {
   position: relative;
   overflow: hidden;
 }
 
-.shiny-btn::before {
+.shiny-btn.animetion-active::before, .shiny-btn-auto.animetion-active::before {
   position: absolute;
   content: '';
   display: inline-block;
