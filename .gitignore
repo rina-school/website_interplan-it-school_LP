@@ -7,3 +7,6 @@
 #公開用パスワード設定ファイルを無視する
 .htaccess
 .htpasswd
+
+#memoは無視する
+/memo.txt

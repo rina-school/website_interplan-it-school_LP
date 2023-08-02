@@ -398,7 +398,7 @@ section.about-contents {
         width: 95%;
         height: 95%;
         background: v.$primaryColor;
-        top: 5%;
+        top: 5.5%;
         left: 5%;
       }
 
@@ -407,7 +407,7 @@ section.about-contents {
         object-fit: cover;
         object-position: center;
         width: 95%;
-        height: 95%;
+        height: 94.5%;
       }
     }
   }
@@ -554,7 +554,13 @@ section.about-contents {
         border-top: 24px solid v.$white;
       }
     }
-  } 
+  }
+
+  .point-in-questions-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
   .point-in-questions-list-item {
     margin-bottom: f.pixelToRemSize(16);
@@ -568,7 +574,6 @@ section.about-contents {
       font-size: f.pixelToRemSize(v.$pixelSizeXs);
       line-height: v.$fontLineHeight20;
       padding-left: f.pixelToRemSize(v.$pixelSizeXs);
-      white-space: nowrap;
 
       @include m.mq {
         padding-left: f.spMinRangeVwRemSize(v.$pixelSizeXxs, v.$spViewPort, v.$pixelSizeXs);
@@ -854,7 +859,7 @@ section.about-contents {
     left: -32px;
 
     @include m.mq {
-      width: f.spMinRangeVwRemSize(90, v.$spViewPort, 170);
+      width: f.spMinRangeVwRemSize(98, v.$spViewPort, 178);
       height: f.spMinRangeVwRemSize(40, v.$spViewPort, 60);
       border-radius: f.spMinRangeVwRemSize(16, v.$spViewPort, 24);
       top: max(f.pixelToVwSize(-20, v.$spViewPort), -30px);
@@ -876,11 +881,14 @@ section.about-contents {
       height: 90px;
 
       @include m.mq {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
         top: 50%;
         transform: translateY(-50%);
         font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
         line-height: f.spMinRangeVwRemSize(28, v.$spViewPort, 35);
-        width: auto;
+        width: 100%;
         height: auto;
         padding: f.pixelToVwSize(8, v.$spViewPort) f.pixelToVwSize(16, v.$spViewPort);
       }
@@ -1448,7 +1456,7 @@ footer {
   padding: f.pixelToRemSize(24) 0;
 
   @include m.mq {
-    padding-bottom: f.spMinRangeVwRemSize(80, v.$spViewPort, 96); 
+    padding-bottom: f.pixelToRemSize(96); 
   }
 
   .footer-nav-list {
@@ -1506,13 +1514,24 @@ footer {
   z-index: v.$zindexSpBottomBtn;
 
   @include m.mq {
-    width: f.spMinRangeVwRemSize(30, v.$spViewPort, 50);
-    height: f.spMinRangeVwRemSize(30, v.$spViewPort, 50);
-    bottom: f.spMinRangeVwRemSize(96, v.$spViewPort, 96);
+    min-width: 35px;
+    width: f.spMinRangeVwRemSize(40, v.$spViewPort, 50);
+    min-height: 35px;
+    height: f.spMinRangeVwRemSize(40, v.$spViewPort, 50);
+    bottom: 96px;
     right: f.spMinRangeVwRemSize(16, v.$spViewPort, 24);
   }
 
   a {
+    display: block;
+    width: 50px;
+    height: 50px;
+
+    @include m.mq {
+      width: clamp(35px, f.pixelToVwSize(40, v.$spViewPort), 50px);
+      height: clamp(35px, f.pixelToVwSize(40, v.$spViewPort), 50px);
+    }
+
     .fa-chevron-right{
       width: 100%;
       height: 100%;
@@ -1524,12 +1543,12 @@ footer {
         font-size: f.pixelToRemSize(v.$pixelSizeMd);
         line-height: 50px;
         color: v.$white;
-        left: 45%;
-        transform: translateX(-45%);
+        left: 50%;
+        transform: translateX(-50%);
 
         @include m.mq {
           font-size: f.spMinRangeVwRemSize(v.$pixelSizeSm, v.$spViewPort, v.$pixelSizeMd);
-          line-height: f.spMinRangeVwRemSize(30, v.$spViewPort, 50);
+          line-height: clamp(35px, f.pixelToVwSize(40, v.$spViewPort), 50px);
         }
       }
     }
@@ -1541,6 +1560,7 @@ footer {
   }
 }
 
+// SP用固定ボタン
 .bottom-inquiry-btn-fixed {
   @include m.mq {
     position: fixed;
@@ -1553,7 +1573,7 @@ footer {
   .bottom-inquiry-btn {
     @include m.mq {
       position: absolute;
-      bottom: 32px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       display: inline-block;
