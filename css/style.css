@@ -670,7 +670,7 @@ section.about-contents .about-contents-area .about-img-area .about-img {
   background: linear-gradient(rgba(255, 244, 221, 0.88), rgba(255, 244, 221, 0.88)), url(../img/inquiry-bg.jpeg) center center/cover no-repeat;
 }
 .inquiry-contents-area .inquiry-contents-point-in-questions {
-  width: 633px;
+  width: 643px;
   position: relative;
   background-color: #fff;
   display: flex;

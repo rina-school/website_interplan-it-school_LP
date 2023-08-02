@@ -33,9 +33,11 @@ $(document).ready(function () {
       }
     });
 
+    // 卒業生の作品
     $productionSlick.each(function() {
       let position = $(this).offset().top;
       if (scrollTop > position - windowHeight){
+
         // 卒業生の作品のslickの動き
         $productionSlick.not('.slick-initialized').slick({
           autoplay: true,
@@ -85,10 +87,6 @@ $(document).ready(function () {
           });
         }
       });
-
-    
-    } else {
-
     }
   });
 
