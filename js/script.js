@@ -136,6 +136,16 @@ $(document).ready(function () {
     // 960px以下の場合
     if (window.innerWidth <= 960) {
 
+      // メインビジュアルの要素調整
+      if (window.innerWidth * 1.5 > window.innerHeight) {
+        $('.mv-contents-area').addClass('mv-contents-area-scale');
+
+      } else {
+        if ($('.mv-contents-area').hasClass('mv-contents-area-scale')) {
+          $('.mv-contents-area').removeClass('mv-contents-area-scale');
+        }
+      }
+
       // インタープランについての表示順変更のためDOM削除
       if ($aboutTxtArea.parent().attr('class') == 'about-txt-area') {
         $aboutTxtArea.unwrap();
@@ -164,6 +174,11 @@ $(document).ready(function () {
 
       // 961px以上の場合
     } else {
+
+      // メインビジュアルの要素調整
+      if ($('.mv-contents-area').hasClass('mv-contents-area-scale')) {
+        $('.mv-contents-area').removeClass('mv-contents-area-scale');
+      }
 
       // インタープランについての表示順変更のためDOM追加
       if ($aboutTxtArea.parent().attr('class') != 'about-txt-area') {

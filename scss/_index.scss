@@ -211,16 +211,31 @@ header {
   width: 100%;
   height: calc(100vh - v.$pcHeaderHeight - v.$pcNavHeight);
   background: v.$mvBgColor url(../img/mv-bg.png) center center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: f.pixelToVwSize(48, v.$pcViewPort);
 
   @include m.mq {
     height: calc(100vh - v.$spHeaderHeight);
-    flex-direction: column;
+  }
+
+  &-area {
+    display: flex;
     align-items: center;
-    padding-left: f.spMinRangeVwRemSize(20, v.$spViewPort, 30);
+    justify-content: center;
+    gap: f.pixelToVwSize(48, v.$pcViewPort);
+    height: 100%;
+
+    @include m.mq {
+      width: 100%;
+      flex-direction: column;
+      padding-left: f.spMinRangeVwRemSize(20, v.$spViewPort, 30);
+      padding-top: f.spMinRangeVwRemSize(24, v.$spViewPort, 40);
+      gap: f.spMinRangeVwRemSize(24, v.$spViewPort, 40);
+    }
+
+    &.mv-contents-area-scale {
+      @include m.mq {
+        scale: 0.85;
+      }
+    }
   }
 
   .txt-area {
@@ -1079,6 +1094,10 @@ section.about-contents {
     .production-item-list.slick-slide {
       width: 300px !important; // htmlでcssが設定されているので強制的に上書き
       margin: 0 f.pixelToRemSize(16);
+
+      @include m.mq {
+        width: f.spMinRangeVwRemSize(300, v.$spViewPort, 300) !important;
+      }
     }
 
     picture {
@@ -1087,6 +1106,11 @@ section.about-contents {
       height: 200px;
       margin: 0;
       padding: 0;
+
+      @include m.mq {
+        width: f.spMinRangeVwRemSize(300, v.$spViewPort, 300) !important;
+        height: f.spMinRangeVwRemSize(200, v.$spViewPort, 200) !important;
+      }
 
       img {
         width: 100%;
