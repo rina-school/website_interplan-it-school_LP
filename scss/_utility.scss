@@ -17,6 +17,14 @@
   }
 }
 
+.section-bg-memphis {
+  background: linear-gradient(rgba(v.$white, 0.92), rgba(v.$white, 0.92)), url(../img/bg-memphis.jpg), center center/100%;
+}
+
+.section-bg-paper {
+  background: linear-gradient(rgba(v.$white, 0.4), rgba(v.$white, 0.4)), url(../img/bg_paper.png) center center/cover;
+}
+
 .txt-underline {
   text-decoration: underline v.$primaryColor;
   text-decoration-thickness: 3px;
