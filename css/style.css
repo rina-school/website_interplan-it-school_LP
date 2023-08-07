@@ -89,7 +89,7 @@ img {
 }
 
 .section-bg-memphis {
-  background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url(../img/bg-memphis.jpg), center center/100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url(../img/bg-memphis.jpg), center center/cover;
 }
 
 .section-bg-paper {
