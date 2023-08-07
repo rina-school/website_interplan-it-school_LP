@@ -9,6 +9,7 @@ $(document).ready(function () {
   const $header = $('header');
   const $aboutTxtArea = $('.js-about-txt-area');
   const $headerNavBtn = $('.header-nav-btn');
+  const $mvContents = $('.mv-contents');
 
   // スクロールした場合の処理
   $(window).on('scroll', () => {
@@ -134,10 +135,10 @@ $(document).ready(function () {
     });
 
     // 960px以下の場合
-    if (window.innerWidth <= 960) {
+    if (windowHeight <= 960) {
 
       // メインビジュアルの要素調整
-      if (window.innerWidth * 1.5 > window.innerHeight) {
+      if (windowHeight * 1.5 > windowHeight) {
         $('.mv-contents-area').addClass('mv-contents-area-scale');
 
       } else {
@@ -171,6 +172,12 @@ $(document).ready(function () {
 
         e.stopPropagation();
       });
+
+      // スマホ、タブレットでメインビジュアルの高さを「viewportの高さいっぱい-headerの高さ」にする
+      if ((navigator.userAgent.match(/iPhone|iPad|Android.+Mobile|Macintosh/) && 'ontouchend' in document) || (navigator.userAgentData && navigator.userAgentData.mobile)) {
+        let headerHeight = $headerFix[0].getBoundingClientRect().height;
+        $mvContents.height(windowHeight - headerHeight);
+      }
 
       // 961px以上の場合
     } else {
