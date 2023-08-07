@@ -152,7 +152,7 @@ header {
   @include m.mq {
     position: fixed;
     width: auto;
-    height: calc(100% - v.$spHeaderHeight);
+    height: calc(100vh - v.$spHeaderHeight);
     top: v.$spHeaderHeight;
     right: 0;
     bottom: initial;
@@ -348,12 +348,7 @@ header {
 
 // インタープランについて
 section.about-contents {
-  padding-top: calc(v.$pcNavHeight + v.$pcSectionPaddingHeight);
   background: linear-gradient(rgba(v.$white, 0.4), rgba(v.$white, 0.4)), url(../img/bg_paper.png) center center/cover;
-
-  @include m.mq {
-    padding-top: v.$spSectionPaddingHeight;
-  }
 
   .about-contents-area {
     max-width: 990px;

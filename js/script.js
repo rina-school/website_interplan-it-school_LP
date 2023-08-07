@@ -10,6 +10,21 @@ $(document).ready(function () {
   const $aboutTxtArea = $('.js-about-txt-area');
   const $headerNavBtn = $('.header-nav-btn');
   const $mvContents = $('.mv-contents');
+  const $mvContentsArea = $('.mv-contents-area');
+
+  // スクロールジャンクの警告メッセージへの対応
+  jQuery.event.special.touchstart = {
+    setup: function( _, ns, handle ){
+      this.addEventListener('touchstart', handle, { passive: true });
+    }
+  };
+
+  jQuery.event.special.touchmove = {
+    setup: function( _, ns, handle ){
+      this.addEventListener('touchmove', handle, { passive: true });
+    }
+  };
+
 
   // スクロールした場合の処理
   $(window).on('scroll', () => {
@@ -70,10 +85,11 @@ $(document).ready(function () {
     // 960px以下の場合
     if (window.innerWidth <= 960) {
 
-      // cssのアニメーション処理
+      // 卒業生の声
       $voiceSlick.each(function() {
         let position = $(this).offset().top;
         if (scrollTop > position - windowHeight){
+
           // 卒業生の声のslickの動き
           $voiceSlick.not('.slick-initialized').slick({
             autoplay: true,
@@ -116,34 +132,45 @@ $(document).ready(function () {
     // #で始まるアンカーをクリックした場合に処理
     $anchorLink.off('click');
     $anchorLink.on('click', function(e) {
-        // ハンバーガーメニューでクリックされていた場合、ハンバーガーメニューを閉じる
+
+      // ハンバーガーメニューでクリックされていた場合、ハンバーガーメニューを閉じる
       if ($header.hasClass('js-nav-sp-active')) {
         $header.removeClass('js-nav-sp-active');
       }
       // リンク先の要素を取得
-      let href= $(this).attr('href');
-      let target = $(href == "#" || href == "" ? 'html' : href);
+      let href = $(this).attr('href');
+      let target = $(href == '#' || href == '' ? 'html' : href);
       // リンク先の要素が存在する場合はスクロール処理を実行
       if (target.length) {
+        let headerOuterHeight = $header.outerHeight();
         // ヘッダーの高さを考慮してスクロール位置を計算
-        let position = target.offset().top;
-        // スクロールアニメーションを実行
-        $('html, body').animate({scrollTop: position}, 500, 'swing');
+        let position = target.offset().top - headerOuterHeight;
+        // スクロールアニメーションを実行（LazyLoad対応版）
+        $.when(
+          $('html, body').animate({scrollTop: position}, 500, 'swing'),
+          e.preventDefault(),
+        ).done(function() {
+          let diff = target.offset().top - headerOuterHeight;
+          if (diff === position) {
+          } else {
+            $('html, body').animate({scrollTop: diff}, 10, 'swing');
+          }
+        });
         return false;
       }
       e.stopPropagation();
     });
 
     // 960px以下の場合
-    if (windowHeight <= 960) {
+    if (window.innerWidth <= 960) {
 
       // メインビジュアルの要素調整
-      if (windowHeight * 1.5 > windowHeight) {
-        $('.mv-contents-area').addClass('mv-contents-area-scale');
+      if (window.innerWidth * 1.5 > windowHeight) {
+        $mvContentsArea.addClass('mv-contents-area-scale');
 
       } else {
-        if ($('.mv-contents-area').hasClass('mv-contents-area-scale')) {
-          $('.mv-contents-area').removeClass('mv-contents-area-scale');
+        if ($mvContentsArea.hasClass('mv-contents-area-scale')) {
+          $mvContentsArea.removeClass('mv-contents-area-scale');
         }
       }
 
@@ -183,8 +210,8 @@ $(document).ready(function () {
     } else {
 
       // メインビジュアルの要素調整
-      if ($('.mv-contents-area').hasClass('mv-contents-area-scale')) {
-        $('.mv-contents-area').removeClass('mv-contents-area-scale');
+      if ($mvContentsArea.hasClass('mv-contents-area-scale')) {
+        $mvContentsArea.removeClass('mv-contents-area-scale');
       }
 
       // インタープランについての表示順変更のためDOM追加

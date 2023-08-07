@@ -26,6 +26,15 @@ section:not(.mv-contents) {
   }
 }
 
+section.about-contents {
+  padding-top: 180px;
+}
+@media screen and (max-width: 960px) {
+  section.about-contents {
+    padding-top: clamp(56px, 19.2vw, 104px);
+  }
+}
+
 section.production-contents {
   padding-bottom: 2.5rem;
 }
@@ -326,7 +335,7 @@ header {
   .nav-area {
     position: fixed;
     width: auto;
-    height: calc(100% - min(16vw, 90px));
+    height: calc(100vh - min(16vw, 90px));
     top: min(16vw, 90px);
     right: 0;
     bottom: initial;
@@ -512,13 +521,7 @@ header {
 }
 
 section.about-contents {
-  padding-top: 180px;
   background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(../img/bg_paper.png) center center/cover;
-}
-@media screen and (max-width: 960px) {
-  section.about-contents {
-    padding-top: 64px;
-  }
 }
 section.about-contents .about-contents-area {
   max-width: 990px;

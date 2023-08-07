@@ -27,6 +27,14 @@ section:not(.mv-contents) {
   }
 }
 
+section.about-contents {
+  padding-top: calc(v.$pcNavHeight + v.$pcSectionPaddingHeight);
+
+  @include m.mq {
+    padding-top: clamp(56px, f.pixelToVwSize(72, v.$spViewPort), v.$pcSectionPaddingHeight);
+  }
+}
+
 section.production-contents {
   padding-bottom: f.pixelToRemSize(40);
 }
