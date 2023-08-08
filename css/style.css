@@ -35,10 +35,6 @@ section.about-contents {
   }
 }
 
-section.production-contents {
-  padding-bottom: 2.5rem;
-}
-
 h2.section-title {
   font-size: 2.25rem;
   font-weight: 700;
@@ -95,6 +91,17 @@ img {
   .sp-only {
     display: initial;
   }
+}
+
+.js-fadeIn {
+  opacity: 0;
+  transition-duration: 1s;
+  transition-property: opacity, transform;
+  transform: translateY(50px);
+}
+.js-fadeIn.is-scrollIn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-bg-memphis {
@@ -1280,6 +1287,14 @@ section.about-contents .about-contents-area .about-img-area .about-img {
     gap: 1.5rem;
     margin: 0 0.4% 1.5rem 0;
     flex-shrink: 0;
+  }
+}
+.voice-contents .voice-item-list:last-child {
+  margin-bottom: 0;
+}
+@media screen and (max-width: 960px) {
+  .voice-contents .voice-item-list:last-child {
+    margin-bottom: 1.5rem;
   }
 }
 .voice-contents .voice-item-list:nth-child(even) {

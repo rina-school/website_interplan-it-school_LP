@@ -1147,6 +1147,14 @@ section.about-contents {
       flex-shrink: 0;
     }
 
+    &:last-child {
+      margin-bottom: 0;
+
+      @include m.mq {
+        margin-bottom: f.pixelToRemSize(24);
+      }
+    }
+
     &:nth-child(even) {
       flex-direction: row-reverse;
 

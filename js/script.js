@@ -11,20 +11,20 @@ $(document).ready(function () {
   const $headerNavBtn = $('.header-nav-btn');
   const $mvContents = $('.mv-contents');
   const $mvContentsArea = $('.mv-contents-area');
+  const $fadeIn = $('.js-fadeIn');
 
   // スクロールジャンクの警告メッセージへの対応
   jQuery.event.special.touchstart = {
-    setup: function( _, ns, handle ){
+    setup: function (_, ns, handle) {
       this.addEventListener('touchstart', handle, { passive: true });
     }
   };
 
   jQuery.event.special.touchmove = {
-    setup: function( _, ns, handle ){
+    setup: function (_, ns, handle) {
       this.addEventListener('touchmove', handle, { passive: true });
     }
   };
-
 
   // スクロールした場合の処理
   $(window).on('scroll', () => {
@@ -32,6 +32,16 @@ $(document).ready(function () {
     let headerHeight = $headerFix[0].getBoundingClientRect().height;
     let windowHeight = window.innerHeight;
     let scrollTop = $(window).scrollTop();
+    
+    // フェードイン対象要素が指定されたエリア内に来たらフェードイン実行
+    $fadeIn.each(function() {
+      let offset = $(this).offset().top;
+
+      if(scrollY > offset - windowHeight) {
+        $(this).addClass('is-scrollIn')
+      }
+    });
+
 
     // TOPへ戻るボタンの処理
     if (scrollY >= (windowHeight - headerHeight)) {
@@ -42,17 +52,17 @@ $(document).ready(function () {
     }
 
     // cssのアニメーション処理
-    $('.btn-hover-sway-bottom, .shiny-btn').each(function() {
+    $('.btn-hover-sway-bottom, .shiny-btn').each(function () {
       let position = $(this).offset().top;
-      if (scrollTop > position - windowHeight){
+      if (scrollTop > position - windowHeight) {
         $(this).addClass('animetion-active');
       }
     });
 
     // 卒業生の作品
-    $productionSlick.each(function() {
+    $productionSlick.each(function () {
       let position = $(this).offset().top;
-      if (scrollTop > position - windowHeight){
+      if (scrollTop > position - windowHeight) {
 
         // 卒業生の作品のslickの動き
         $productionSlick.not('.slick-initialized').slick({
@@ -86,9 +96,9 @@ $(document).ready(function () {
     if (window.innerWidth <= 960) {
 
       // 卒業生の声
-      $voiceSlick.each(function() {
+      $voiceSlick.each(function () {
         let position = $(this).offset().top;
-        if (scrollTop > position - windowHeight){
+        if (scrollTop > position - windowHeight) {
 
           // 卒業生の声のslickの動き
           $voiceSlick.not('.slick-initialized').slick({
@@ -113,16 +123,16 @@ $(document).ready(function () {
     let scrollTop = $(window).scrollTop();
 
     // cssのアニメーション処理
-    $('.btn-hover-sway-bottom-auto, .shiny-btn-auto').each(function() {
+    $('.btn-hover-sway-bottom-auto, .shiny-btn-auto').each(function () {
       let position = $(this).offset().top;
-      if (scrollTop > position - windowHeight){
+      if (scrollTop > position - windowHeight) {
         $(this).addClass('animetion-active');
       }
     });
 
     // FAQの質問をクリックした際の動作
     $faqToggleArea.off('click');
-    $faqToggleArea.on('click', function(e) {
+    $faqToggleArea.on('click', function (e) {
       $(this).toggleClass('js-faq-open');
       $(this).children('dd').slideToggle();
       //ボタン連打防止
@@ -131,7 +141,7 @@ $(document).ready(function () {
 
     // #で始まるアンカーをクリックした場合に処理
     $anchorLink.off('click');
-    $anchorLink.on('click', function(e) {
+    $anchorLink.on('click', function (e) {
 
       // ハンバーガーメニューでクリックされていた場合、ハンバーガーメニューを閉じる
       if ($header.hasClass('js-nav-sp-active')) {
@@ -144,16 +154,16 @@ $(document).ready(function () {
       if (target.length) {
         let headerOuterHeight = $header.outerHeight();
         // ヘッダーの高さを考慮してスクロール位置を計算
-        let position = target.offset().top - headerOuterHeight;
+        let position = target.offset().top - headerOuterHeight + 50;
         // スクロールアニメーションを実行（LazyLoad対応版）
         $.when(
-          $('html, body').animate({scrollTop: position}, 500, 'swing'),
+          $('html, body').animate({ scrollTop: position }, 500, 'swing'),
           e.preventDefault(),
-        ).done(function() {
+        ).done(function () {
           let diff = target.offset().top - headerOuterHeight;
           if (diff === position) {
           } else {
-            $('html, body').animate({scrollTop: diff}, 10, 'swing');
+            $('html, body').animate({ scrollTop: diff }, 10, 'swing');
           }
         });
         return false;
@@ -197,7 +207,7 @@ $(document).ready(function () {
           $header.removeClass('js-nav-sp-active');
         }))
 
-        e.stopPropagation();
+          e.stopPropagation();
       });
 
       // スマホ、タブレットでメインビジュアルの高さを「viewportの高さいっぱい-headerの高さ」にする
