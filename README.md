@@ -1,7 +1,10 @@
-# インタープランITスクールのLPサイト（架空）　※WEB制作
+# インタープランITスクールのLPサイト（架空）　
+カテゴリー： web制作
 
 ## サイトURL
-[Web実践教育のプロフェッショナル - インタープランITスクール求職者支援訓練]（https://intp.site/1539/interplan-it-school/）
+[Web実践教育のプロフェッショナル - インタープランITスクール求職者支援訓練]
+
+（https://intp.site/1539/interplan-it-school/）
 
 ※職務経歴書記載のパスワードのご入力をお願いいたします。
 
@@ -31,4 +34,4 @@ HTML / CSS（SCSS） / JavaScript (jQuery) / Photoshop / Illustrator / Adobe XD
 
 公式サイトに唯一顔出しされていたのがYouTubeの動画だけだったため、動画の読み込みも簡単だが行なってみた。
 
-　PCではメニューを固定表示していないが、SPではメニューをTOP固定でハンバーガーで表示している。
+PCではメニューを固定表示していないが、SPではメニューをTOP固定でハンバーガーで表示している。
